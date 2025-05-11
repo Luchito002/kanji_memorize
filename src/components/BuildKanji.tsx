@@ -62,7 +62,7 @@ export default function BuildKanji({ kanji, userKanjiLearned }: Props) {
     // Check if selected radicals match the kanji radicals
     const correctRadicals = kanji.radicals.map(r => r.character)
     if (selectedRadicals.length === correctRadicals.length && selectedRadicals.every(r => correctRadicals.includes(r))) {
-      setMessage("Correct! You formed the kanji correctly.")
+      setMessage("正解")
     } else {
       setMessage("Incorrect. Try again.")
     }
@@ -87,9 +87,11 @@ export default function BuildKanji({ kanji, userKanjiLearned }: Props) {
         }
       </div>
       <Button onClick={handleSubmit}>ARMAR</Button>
-      <Lottie animationData={confettiAnimation} />
+
       {/* Feedback message */}
+      {message && <Lottie className="fixed" animationData={confettiAnimation} loop={false} />}
       {message && <p className="mt-4 text-xl">{message}</p>}
+      {message && <Button className="z-50" onClick={handleSubmit}>Continuar</Button>}
     </div>
   )
 }

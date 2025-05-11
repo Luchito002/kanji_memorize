@@ -1,0 +1,149 @@
+[
+  {
+    "character": "口",
+    "radicals": [
+      { "character": "口", "meanings": ["boca"] }
+    ],
+    "meanings": ["boca", "apertura"],
+    "examples": ["人口: población", "口語: lenguaje hablado"],
+    "story": "Este simple cuadrado representa una boca abierta. La forma lo dice todo: una apertura por donde salen las palabras.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E5%8F%A3.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "品",
+    "radicals": [
+      { "character": "口", "meanings": ["boca"] }
+    ],
+    "meanings": ["producto", "artículo"],
+    "examples": ["商品: mercancía", "食品: alimento"],
+    "story": "Tres bocas alineadas… tal vez cada una opinando sobre la calidad de un producto. Cuando se juntan muchas bocas, aparece el juicio colectivo: los artículos evaluados.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E5%93%81.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "一",
+    "radicals": [
+      { "character": "一", "meanings": ["uno"] }
+    ],
+    "meanings": ["uno"],
+    "examples": ["一人: una persona", "一日: un día"],
+    "story": "Una simple línea horizontal representa lo más básico: el número uno. Es lo primero, lo único, el principio de todo.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E4%B8%80.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "二",
+    "radicals": [
+      { "character": "一", "meanings": ["uno"] }
+    ],
+    "meanings": ["dos"],
+    "examples": ["二人: dos personas", "二月: febrero"],
+    "story": "Dos líneas paralelas, una sobre otra: uno más uno. Nada más claro para expresar el número dos.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E4%BA%8C.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "三",
+    "radicals": [
+      { "character": "一", "meanings": ["uno"] }
+    ],
+    "meanings": ["tres"],
+    "examples": ["三人: tres personas", "三日: tres días"],
+    "story": "Tres líneas horizontales. Uno, dos, tres… No hay forma más directa de visualizarlo.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E4%B8%89.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "十",
+    "radicals": [
+      { "character": "十", "meanings": ["diez"] }
+    ],
+    "meanings": ["diez"],
+    "examples": ["十分: suficiente", "十月: octubre"],
+    "story": "Una cruz que une todo. Es como el símbolo de la totalidad, de completar la cuenta: el número diez.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E5%8D%81.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "世",
+    "radicals": [
+      { "character": "一", "meanings": ["uno"] },
+      { "character": "十", "meanings": ["diez"] }
+    ],
+    "meanings": ["mundo", "generación"],
+    "examples": ["世界: mundo", "世代: generación"],
+    "story": "Tres líneas horizontales y una vertical cruzando por el medio. Podrías imaginar diez generaciones conectadas por una línea del tiempo, formando un mundo o una era.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E4%B8%96.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "古",
+    "radicals": [
+      { "character": "十", "meanings": ["diez"] },
+      { "character": "口", "meanings": ["boca"] }
+    ],
+    "meanings": ["viejo", "antiguo"],
+    "examples": ["古代: antigüedad", "古本: libro viejo"],
+    "story": "Una boca que ha hablado por diez generaciones… eso ya es antiguo. Una voz que viene desde el pasado.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E5%8F%A4.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "中",
+    "radicals": [
+      { "character": "口", "meanings": ["boca"] },
+      { "character": "丨", "meanings": ["línea"] }
+    ],
+    "meanings": ["centro", "medio"],
+    "examples": ["中心: centro", "中学: secundaria"],
+    "story": "Una línea atraviesa justo el medio de una boca cuadrada. Lo que está en el centro, justo al medio, es donde todo se enfoca.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E4%B8%AD.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "目",
+    "radicals": [
+      { "character": "目", "meanings": ["ojo"] }
+    ],
+    "meanings": ["ojo"],
+    "examples": ["目標: objetivo", "目的: propósito"],
+    "story": "Un ojo claramente representado: la pupila cuadrada, el contorno… No hay confusión posible. Este es el kanji de ver y enfocar.",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E7%9B%AE.gif",
+      "kanjiEasyRemember": ""
+    }
+  },
+  {
+    "character": "見",
+    "radicals": [
+      { "character": "目", "meanings": ["ojo"] },
+      { "character": "儿", "meanings": ["dos piernas"] }
+    ],
+    "meanings": ["ver", "mirar"],
+    "examples": ["意見: opinion", "見地: perspectiva"],
+    "story": "Seguramente, la imagen de “ojo encima de unas piernas” estaba justamente en tu mente esperando para ayudarte a recordar este carácter de ver…. Anda con mucho ojo en distinguir las patas de la almeja saltarina mirar",
+    "kanjiImages": {
+      "kanjiStrokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/%E8%A6%8B.gif",
+      "kanjiEasyRemember": ""
+    }
+  }
+]

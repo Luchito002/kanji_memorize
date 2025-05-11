@@ -1,6 +1,6 @@
 import { Kanji } from "@/types/kanji"
 import { Button } from "./ui/button"
-import { highlightStory } from "@/utilites/highlightStory.utilites";
+import { highlightStory } from "@/utilites/highlightStory.utilities";
 
 interface Props {
   kanji: Kanji
@@ -10,7 +10,7 @@ export default function NewKanji({ kanji }: Props) {
   return (
     <div className="flex flex-col items-center text-center space-y-6 p-6 max-w-xl mx-auto">
       {/* MEANINGS */}
-      <h2 className="text-xl text-gray-600 italic">
+      <h2 className="text-3xl font-bold">
         {kanji.meanings.join(" / ")}
       </h2>
 
