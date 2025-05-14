@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+
+  --font-display: "Nunito", "sans-serif";
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -77,7 +83,7 @@
 }
 
 .dark {
-  --background: #110F1A;
+  --background: #100F1B;
   --foreground: #fff8f9;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -114,9 +120,30 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
+.border-bonito {
+  border: 3px solid #566972;
+  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+  position: relative;
+}
+
+.border-bonito::before {
+  content: '';
+  border: 2px solid #566972;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+  border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+}
+
 
 /*#ffb7c5*/
