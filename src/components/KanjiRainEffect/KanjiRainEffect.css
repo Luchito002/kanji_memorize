@@ -1,0 +1,73 @@
+.kanji-rain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  z-index: 0;
+  padding: 0 1rem;
+}
+
+.kanji-column {
+  display: flex;
+  flex-direction: column;
+  animation-name: columnFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  gap: 1.5rem;
+}
+
+.kanji-char {
+  color: #E3EDDF;
+  font-size: 1.6rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeInOut 8s linear infinite, sway 4s ease-in-out infinite alternate, spin 12s linear infinite;
+}
+
+@keyframes columnFall {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(50px);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.3;
+  }
+
+  30% {
+    opacity: 0.8;
+  }
+
+  70% {
+    opacity: 0.8;
+  }
+
+  90% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
