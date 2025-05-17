@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import kanjiMind from "../../assets/kanjiMind.png"
 import { motion, useInView } from "framer-motion";
+import "./HomePage.css"
 
 interface Props {
   title: string,

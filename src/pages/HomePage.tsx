@@ -1,5 +1,5 @@
-import Hero from '@/components/HomgePage/Hero';
-import Explanation from '@/components/HomgePage/Explanation';
+import Hero from '@/components/HomePage/Hero';
+import Explanation from '@/components/HomePage/Explanation';
 import KanjiRainEffect from '@/components/KanjiRainEffect/KanjiRainEffect';
 
 export default function HomePage() {

@@ -22,8 +22,8 @@ export default function NewKanjiPage() {
   }, []);
 
   return (
-    <>
+    <div className="flex items-center justify-center">
       <NewKanji kanji={target} />
-    </>
+    </div>
   )
 }

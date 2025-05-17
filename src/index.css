@@ -5,7 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-
   --font-display: "Nunito", "sans-serif";
 }
 
@@ -16,6 +15,9 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-kanji-border: var(--kanji-border);
+  --color-kanji-background: var(--kanji-background);
+  --color-kanji-foreground: var(--kanji-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -49,21 +51,28 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #fff8f9;
-  --foreground: oklch(0.145 0 0);
+  --background: #FBEEDA;
+  --foreground: #3C3C3C;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
+  --kanji-border: #E3C8B1;
+  --kanji-background: #FCFBF2;
+  --kanji-foreground: #93403F;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --hover: #f2a7b5;
+  --primary: #E28473;
+  --primary-foreground: #FCFCFA;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --accent: #E94F64; /* kanji */
+  --accent-foreground: #ffffff;
+  --success: #A0CFA3; /* correct */
+  --success-foreground: #1A1518;
+  --destructive: #D88C9A; /* incorrect */
+  --destructive-foreground: #1A1518;
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -83,21 +92,26 @@
 }
 
 .dark {
-  --background: #100F1B;
-  --foreground: #fff8f9;
+  --background: #1C121E;
+  --foreground: #F6F1F4;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
+  --kanji-border: #E3C8B1;
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --hover: #c65d9b;
+  --primary: #d96ba9;
+  --primary-foreground: #fff0f3;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --accent: #E48FB3; /* kanji */
+  --accent-foreground: #1A1518;
+  --success: #85B88A; /* correct */
+  --success-foreground: #1A1518;
+  --destructive: #C26A7E; /* incorrect*/
+  --destructive-foreground: #F6F1F4;
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -125,25 +139,4 @@
     @apply bg-background text-foreground;
   }
 }
-
-.border-bonito {
-  border: 3px solid #566972;
-  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
-  position: relative;
-}
-
-.border-bonito::before {
-  content: '';
-  border: 2px solid #566972;
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
-  border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
-}
-
-
 /*#ffb7c5*/

@@ -1,5 +1,5 @@
 //import { ModeToggle } from "./mode-toggle";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import logoApp from "@/assets/logoApp.png"
 
 export default function NavbarHomePage() {

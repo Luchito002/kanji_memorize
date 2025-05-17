@@ -3,7 +3,7 @@ import { radicals as allRadicals } from "@/types/radicals"
 import { Kanji } from "@/types/kanji"
 import { Button } from "./ui/button"
 import Lottie from "lottie-react"
-import confettiAnimation from "../../public/confetti.json"
+import ConfettiAnimation from "./Modal/ConfettiAnimation"
 
 interface Props {
   kanji: Kanji,
@@ -69,7 +69,7 @@ export default function BuildKanji({ kanji, userKanjiLearned }: Props) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <main className="flex flex-col items-center text-center space-y-6 px-6 py-32 w-full">
       <h1>{kanji.meanings.join('/')}</h1>
       <h2>Selecciona los radicales para armar el kanji.</h2>
 
@@ -89,9 +89,9 @@ export default function BuildKanji({ kanji, userKanjiLearned }: Props) {
       <Button onClick={handleSubmit}>ARMAR</Button>
 
       {/* Feedback message */}
-      {message && <Lottie className="fixed" animationData={confettiAnimation} loop={false} />}
+      {message && <ConfettiAnimation />}
       {message && <p className="mt-4 text-xl">{message}</p>}
       {message && <Button className="z-50" onClick={handleSubmit}>Continuar</Button>}
-    </div>
+    </main>
   )
 }
