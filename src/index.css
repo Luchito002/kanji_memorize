@@ -51,8 +51,8 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #FBEEDA;
-  --foreground: #3C3C3C;
+  --background: #FFEAEA;
+  --foreground: #3E1610;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --kanji-border: #E3C8B1;
@@ -74,7 +74,7 @@
   --destructive: #D88C9A; /* incorrect */
   --destructive-foreground: #1A1518;
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --input: oklch(1 0 0 / 10%);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);

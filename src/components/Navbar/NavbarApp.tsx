@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ModeToggle } from "../mode-toggle";
 import { Button } from "../ui/button";
 import logoApp from "@/assets/logoApp.png";
+import { Link } from "react-router-dom";
 
 export default function NavbarApp() {
   const [open, setOpen] = useState(false);
@@ -14,10 +15,10 @@ export default function NavbarApp() {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center gap-6">
-          <li><a href="#about" className="hover:underline">Aprender</a></li>
-          <li><a href="#practice" className="hover:underline">Practicar</a></li>
+          <li><Link to="/nuevo">Aprender</Link></li>
+          <li><Link to="/armar">Practicar</Link></li>
           <li><ModeToggle /></li>
-          <li><Button variant="outline" size="xl">Iniciar Sesión</Button></li>
+          <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -40,8 +41,8 @@ export default function NavbarApp() {
       {open && (
         <div className="lg:hidden px-4 pb-4">
           <ul className="flex flex-col gap-4">
-            <li><a href="#about" className="block">Aprender</a></li>
-            <li><a href="#practice" className="block">Practicar</a></li>
+            <li><Link to="/nuevo">Aprender</Link></li>
+            <li><Link to="/armar">Practicar</Link></li>
             <li><ModeToggle /></li>
             <li><Button variant="outline" className="w-full">Iniciar Sesión</Button></li>
           </ul>

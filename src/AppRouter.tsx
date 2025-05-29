@@ -6,12 +6,14 @@ import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import HomeLayout from "./layouts/HomeLayout";
 import AppLayout from "./layouts/AppLayout";
+import LoginPage from "./pages/LoginPage";
 
 export default function AppRouter() {
   return (
     <Routes>
       <Route element={<HomeLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/404" element={<h1>Not Found</h1>} />
       </Route>
 

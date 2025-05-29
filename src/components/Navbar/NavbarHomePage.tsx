@@ -1,4 +1,5 @@
 //import { ModeToggle } from "./mode-toggle";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import logoApp from "@/assets/logoApp.png"
 
@@ -13,7 +14,7 @@ export default function NavbarHomePage() {
         <ul className="flex items-center gap-8">
           <li className="cursor-pointer"><a href="#about">Acerca</a></li>
           {/* <li><ModeToggle /></li> */}
-          <li><Button variant="outline" size="xl">Iniciar Sesión</Button></li>
+          <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
         </ul>
 
       </div>
