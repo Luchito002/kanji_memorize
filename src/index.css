@@ -94,7 +94,7 @@
 .dark {
   --background: #1C121E;
   --foreground: #F6F1F4;
-  --card: oklch(0.205 0 0);
+  --card:	#2A1B2E;
   --card-foreground: oklch(0.985 0 0);
   --kanji-border: #E3C8B1;
   --popover: oklch(0.205 0 0);

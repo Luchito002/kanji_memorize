@@ -7,14 +7,19 @@ import MenuPage from "./pages/MenuPage";
 import HomeLayout from "./layouts/HomeLayout";
 import AppLayout from "./layouts/AppLayout";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export default function AppRouter() {
   return (
     <Routes>
       <Route element={<HomeLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/404" element={<h1>Not Found</h1>} />
+      </Route>
+
+      <Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
 
       <Route element={<AppLayout />}>

@@ -1,29 +1,39 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormValues, schema } from "@/components/CustomForm"
+import { LoginFormValues, loginSchema } from "@/components/CustomForm"
 import InputForm from '@/components/CustomForm/CustomInput';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useApi } from '@/hooks/useApi';
-import { RegisterPayload, RegisterResponse } from '@/models';
-import { postRegisterUser } from '@/services/api.service';
+import { LoginPayload, LoginResponse } from '@/models';
+import { postLoginUser } from '@/services/api.service';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  const navigate = useNavigate()
+
+  const { control, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
     mode: "onBlur",
     defaultValues: {
       name: "",
       password: "",
-      confirmPassword: "",
     },
-  })
+  });
 
-  const { loading, error, data, fetch} = useApi<RegisterResponse, RegisterPayload>(postRegisterUser)
+  const { loading, error, data, fetch } = useApi<LoginResponse, LoginPayload>(postLoginUser)
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const payload: RegisterPayload = {
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem("token", data.access_token)
+      navigate("/menu")
+    }
+  }, [data, navigate])
+
+  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
+    const payload: LoginPayload = {
       username: data.name,
-      password: data.password
+      password: data.password,
     };
 
     fetch(payload);
@@ -32,17 +42,29 @@ export default function LoginPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-screen w-screen flex flex-col justify-center items-center px-4"
+      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 "
     >
-      <InputForm name='name' control={control} label='Nombre' type='text' error={errors.name} />
-      <InputForm name='password' control={control} label='Contraseña' type='password' error={errors.password} />
-      <InputForm name='confirmPassword' control={control} label='Confirmar contraseña' type='password' error={errors.confirmPassword} />
-      {loading && <p className="text-blue-500 mb-4">Enviando...</p>}
-      {error && <p className="text-red-500 mb-4">{error.message}</p>}
-      {data && <p className="text-green-500 mb-4">¡Registro exitoso!</p>}
-      <Button type='submit'>
-        Continuar
-      </Button>
+      <div>
+        ¿No tienes una cuenta?
+        <Link to="/register"> <Button variant="outline" size="lg">REGISTRATE</Button></Link>
+      </div>
+
+      <div className="w-full max-w-md bg-card text-card-foreground p-8 rounded-2xl shadow-md border border-border">
+        <h1 className="text-2xl font-semibold mb-6 text-center">Iniciar sesión</h1>
+
+        <div className="space-y-4">
+          <InputForm name="name" control={control} label="Nombre de usuario" type="text" error={errors.name} />
+          <InputForm name="password" control={control} label="Contraseña" type="password" error={errors.password} />
+        </div>
+
+        {loading && <p className="text-sm text-primary mt-4 text-center">Enviando...</p>}
+        {error && <p className="text-sm text-destructive mt-4 text-center">{error.message}</p>}
+        {data && <p className="text-sm text-success mt-4 text-center">¡Inicio exitoso!</p>}
+
+        <Button type="submit" className="w-full mt-6 rounded-xl py-2 text-base font-medium">
+          Continuar
+        </Button>
+      </div>
     </form>
   )
 }

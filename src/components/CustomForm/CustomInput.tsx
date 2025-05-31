@@ -1,18 +1,17 @@
-import { Control, Controller, FieldError } from "react-hook-form";
-import { FormValues } from "./form.schema";
+import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
 
-interface Props {
-  name: keyof FormValues;
-  control: Control<FormValues>;
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  control: Control<T>;
   label: string;
   type?: string;
   error?: FieldError;
 }
 
-const InputForm = ({ name, control, label, type, error }: Props) => {
+const InputForm = <T extends FieldValues>({ name, control, label, type = "text", error }: Props<T>) => {
   return (
-    <div className="mb-6 w-full max-w-md">
-      <label htmlFor={name} className="block text-sm font-medium text-foreground capitalize mb-1">
+    <div className="w-full">
+      <label htmlFor={name} className="block text-sm font-medium text-foreground mb-1 capitalize">
         {label}
       </label>
       <Controller
@@ -23,14 +22,15 @@ const InputForm = ({ name, control, label, type, error }: Props) => {
             id={name}
             type={type}
             {...field}
-            className={`w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${error ? "border-red-500" : "border-gray-300"
+            className={`w-full px-4 py-2 border rounded-xl bg-input text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${error ? "border-destructive" : "border-border"
               }`}
+            placeholder={label}
           />
         )}
       />
-      {error && <p className="mt-1 text-sm text-red-500">{error.message}</p>}
+      {error && <p className="mt-1 text-sm text-destructive">{error.message}</p>}
     </div>
-  )
-}
+  );
+};
 
 export default InputForm;
