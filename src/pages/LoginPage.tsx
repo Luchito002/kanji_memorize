@@ -4,13 +4,18 @@ import InputForm from '@/components/CustomForm/CustomInput';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useApi } from '@/hooks/useApi';
-import { LoginPayload, LoginResponse } from '@/models';
+import { LoginPayload, LoginResponse, UserMeResponse } from '@/models';
 import { postLoginUser } from '@/services/api.service';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { getUserMe } from '@/services/apiUser.service';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
+import { loginSuccess } from '@/redux/states';
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>();
 
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -21,14 +26,22 @@ export default function LoginPage() {
     },
   });
 
-  const { loading, error, data, fetch } = useApi<LoginResponse, LoginPayload>(postLoginUser)
+  const { loading, error, data, fetch } = useApi<LoginResponse, LoginPayload>(postLoginUser);
+  const { fetch: fetchUser, data: userData } = useApi<UserMeResponse, void>(() => getUserMe());
 
   useEffect(() => {
     if (data) {
-      localStorage.setItem("token", data.access_token)
-      navigate("/menu")
+      localStorage.setItem("token", data.access_token);
+      fetchUser();
     }
-  }, [data, navigate])
+  }, [data, fetchUser])
+
+  useEffect(() => {
+    if (userData) {
+      dispatch(loginSuccess(userData));
+      navigate("/menu");
+    }
+  }, [userData, dispatch, navigate]);
 
   const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
     const payload: LoginPayload = {
@@ -42,7 +55,7 @@ export default function LoginPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 "
+      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 z-10"
     >
       <div>
         ¿No tienes una cuenta?

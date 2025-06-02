@@ -3,9 +3,11 @@ import { ModeToggle } from "../mode-toggle";
 import { Button } from "../ui/button";
 import logoApp from "@/assets/logoApp.png";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function NavbarApp() {
   const [open, setOpen] = useState(false);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <nav className="w-full z-50 fixed top-0 left-0 text-foreground shadow">
@@ -19,6 +21,7 @@ export default function NavbarApp() {
           <li><Link to="/armar">Practicar</Link></li>
           <li><ModeToggle /></li>
           <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
+          <li>{currentUser?.username}</li>
         </ul>
 
         {/* Mobile Menu Button */}

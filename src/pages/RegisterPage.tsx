@@ -47,7 +47,7 @@ export default function RegisterPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 "
+      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4"
     >
       <div>
         ¿Ya tienes una cuenta?

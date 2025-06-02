@@ -8,6 +8,7 @@ import HomeLayout from "./layouts/HomeLayout";
 import AppLayout from "./layouts/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import AuthLayout from "./layouts/AuthLayout";
 
 export default function AppRouter() {
   return (
@@ -17,7 +18,7 @@ export default function AppRouter() {
         <Route path="/404" element={<h1>Not Found</h1>} />
       </Route>
 
-      <Route>
+      <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
