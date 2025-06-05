@@ -10,15 +10,13 @@ export default function NavbarApp() {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
-    <nav className="w-full z-50 fixed top-0 left-0 text-foreground shadow">
+    <nav className="w-full z-50 text-foreground shadow">
       <div className="flex justify-between items-center py-4 px-4 max-w-7xl mx-auto">
         {/* Logo */}
         <img src={logoApp} alt="Logo" width={48} height={48} />
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center gap-6">
-          <li><Link to="/nuevo">Aprender</Link></li>
-          <li><Link to="/armar">Practicar</Link></li>
           <li><ModeToggle /></li>
           <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
           <li>{currentUser?.username}</li>

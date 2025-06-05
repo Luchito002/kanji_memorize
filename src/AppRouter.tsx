@@ -15,7 +15,6 @@ export default function AppRouter() {
     <Routes>
       <Route element={<HomeLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/404" element={<h1>Not Found</h1>} />
       </Route>
 
       <Route element={<AuthLayout />}>
@@ -30,7 +29,7 @@ export default function AppRouter() {
         <Route path="/seleccionar" element={<SelectKanjiPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/404" />} />
+      <Route path="*" element={<h1>Not Found</h1>} />
     </Routes>
   )
 }

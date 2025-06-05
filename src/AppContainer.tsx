@@ -6,7 +6,7 @@ import { ModalProvider } from "./components/Modal/context/ModalContext";
 import { Provider } from "react-redux"
 import { store } from "./redux/store";
 
-export default function AppHookContainer() {
+export default function AppContainer() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <ModalProvider>
