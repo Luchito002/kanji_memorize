@@ -37,7 +37,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <Link to="/nuevo">
+          <Link to="/menu">
             <Button variant="outline" size="xl" className="gap-2 text-white border-white hover:bg-white/10">
               <Sparkles className="h-5 w-5" />
               Comenzar a aprender

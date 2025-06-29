@@ -1,18 +1,12 @@
-export type Radical = {
-  character: string,
-  meanings: string[]
-}
-export type KanjiImages = {
-  kanjiStrokeOrder: string,
-  kanjiEasyRemember?: string,
-}
-
 export interface Kanji {
+  position: number;
   character: string;
-  radicals: Radical[];
-  meanings: string[];
+  radicals: string[];
+  meaning: string;
   story: string;
+  jlpt: string;
   examples?: string[];
-  kanjiImages?: KanjiImages;
+  strokeOrder: string;
+  kanjiEasyRemember?: string;
 }
 

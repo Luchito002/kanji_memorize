@@ -1,54 +1,22 @@
-import allKanji from "../../public/allKanji.json";
-import { Kanji } from "@/types/kanji";
-import { useEffect, useState } from "react";
 import KanjiContainer from "@/components/KanjiContainer";
-import KanjiMeanings from "@/components/KanjiMeanings";
-import KanjiCharacter from "@/components/KanjiCharacter";
-import { highlightStory } from "@/utilities/highlightStory.utility";
-import { Button } from "@/components/ui/button";
+import KanjiProgressHeader from "@/components/KanjiProgressHeader";
+import NewKanjiCard from "@/components/NewKanjiPage/NewKanjiCard";
+import NewKanjiFooter from "@/components/NewKanjiPage/NewKanjiFooter";
+import { useDailyKanjis } from "@/hooks/useDailyKanjis";
 
 export default function NewKanjiPage() {
-  const [target, setTarget] = useState<Kanji>({
-    character: "",
-    radicals: [],
-    meanings: [],
-    examples: [],
-    story: "",
-    kanjiImages: {
-      kanjiStrokeOrder: "",
-      kanjiEasyRemember: "",
-    },
-  });
+  const { current, goNext, goPrev, dailyKanjiLimit, index } = useDailyKanjis();
 
-  useEffect(() => {
-    const kanjis: Kanji[] = allKanji;
-    setTarget(kanjis[10]);
-  }, []);
+  if (!current) {
+    return <h1>CARGANDO KANJIS</h1>
+  }
 
   return (
-    <KanjiContainer>
-      {/* MEANINGS*/}
-      <KanjiMeanings meanings={target.meanings} />
-
-      <div className="flex justify-center items-center gap-4">
-        {/* STROKE ORDER */}
-        {target.kanjiImages?.kanjiStrokeOrder &&
-          <img
-            src={target.kanjiImages?.kanjiStrokeOrder}
-            alt={`Trazos de ${target.character}`}
-            className="w-28 h-28 object-contain mt-2"
-          />
-        }
-        {/* KANJI */}
-        <KanjiCharacter kanji={target.character} />
-      </div>
-
-      {/* STORY */}
-      <p className="text-lg leading-relaxed lg:px-80">
-        {highlightStory(target.story, target)}
-      </p>
-
-      <Button className="mt-6" size="xl">Continuar</Button>
+    <KanjiContainer
+      header={<KanjiProgressHeader current={index} max={dailyKanjiLimit || 100} />}
+      footer={<NewKanjiFooter next={goNext} previous={goPrev} />}
+    >
+      <NewKanjiCard kanji={current} />
     </KanjiContainer>
   )
 }
