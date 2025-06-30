@@ -27,7 +27,7 @@ export default function LoginPage() {
   });
 
   const { loading, error, data, fetch } = useApi<LoginResponse, LoginPayload>(postLoginUser);
-  const { fetch: fetchUser, data: userData } = useApi<UserMeResponse, void>(() => getUserMe());
+  const { fetch: fetchUser, data: userData } = useApi<UserMeResponse, void>(getUserMe);
 
   useEffect(() => {
     if (data) {

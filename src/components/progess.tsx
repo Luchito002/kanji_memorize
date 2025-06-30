@@ -1,17 +1,19 @@
 interface Props {
-  current: number;
+  min: number;
   max: number;
+  current: number;
   className?: string;
 }
 
-export function Progress({ current, max, className }: Props) {
-  const percentage = Math.min(Math.max(((current + 1) / max) * 100, 0), 100);
+export function Progress({ min, max, current, className }: Props) {
+  const clamped = Math.min(Math.max(current, min), max);
+  const percentage = ((clamped - min) / (max - min)) * 100;
 
   return (
     <div
       className={`relative w-full h-4 rounded-full bg-primary/20 overflow-hidden ${className || ""}`}
       role="progressbar"
-      aria-valuemin={0}
+      aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={current}
       aria-label="Progreso"

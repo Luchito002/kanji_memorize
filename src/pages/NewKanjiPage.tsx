@@ -5,7 +5,9 @@ import NewKanjiFooter from "@/components/NewKanjiPage/NewKanjiFooter";
 import { useDailyKanjis } from "@/hooks/useDailyKanjis";
 
 export default function NewKanjiPage() {
-  const { current, goNext, goPrev, dailyKanjiLimit, index } = useDailyKanjis();
+  const { current, goNext, goPrev, last_kanji_index, today_kanji_index, end_kanji_index } = useDailyKanjis();
+
+  console.log(last_kanji_index, today_kanji_index, end_kanji_index)
 
   if (!current) {
     return <h1>CARGANDO KANJIS</h1>
@@ -13,7 +15,12 @@ export default function NewKanjiPage() {
 
   return (
     <KanjiContainer
-      header={<KanjiProgressHeader current={index} max={dailyKanjiLimit || 100} />}
+      header={<KanjiProgressHeader
+        min={last_kanji_index}
+        current={today_kanji_index}
+        max={end_kanji_index}
+      />}
+
       footer={<NewKanjiFooter next={goNext} previous={goPrev} />}
     >
       <NewKanjiCard kanji={current} />

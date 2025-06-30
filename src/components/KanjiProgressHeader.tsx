@@ -4,10 +4,11 @@ import { Progress } from "./progess"
 
 interface Props {
   current: number
-  max: number
+  max: number,
+  min: number
 }
 
-export default function KanjiProgressHeader({ current, max }: Props) {
+export default function KanjiProgressHeader({ current, max, min}: Props) {
   const navigate = useNavigate()
 
   const onExit = () => {
@@ -16,7 +17,7 @@ export default function KanjiProgressHeader({ current, max }: Props) {
 
   return (
     <div className="w-full flex items-center justify-between mb-6 gap-4">
-      <Progress current={current} max={max} />
+      <Progress current={current} max={max} min={min}/>
 
       {/* Exit button */}
       <button

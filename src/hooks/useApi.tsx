@@ -26,6 +26,7 @@ export const useApi = <T, P,>(apiCall: (param: P) => UseApiCall<T>, options?: Us
     setLoading(true);
 
     call.then((response) => {
+      console.log(response.data)
       setData(response.data);
       setError(null);
     }).catch((err) => {
