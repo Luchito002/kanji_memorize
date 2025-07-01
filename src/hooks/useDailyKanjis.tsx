@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { Kanji } from "@/types/kanji";
 import { useApi } from "./useApi";
 import { ApiResponse } from "@/types/api_response";
-import { postCreateDailyProgress, postIncreaseDailyProgress, postDecreaseDailyProgress } from "@/services/apiDailyProgress.service";
+import { postCreateDailyProgress, postIncreaseDailyProgress, postDecreaseDailyProgress, postCompleteDailyProgress } from "@/services/apiDailyProgress.service";
 import { DailyProgressResponse } from "@/models/daily_progress.model";
 
 export function useDailyKanjis() {
+  const [complete, setComplete] = useState<boolean>(false);
   const [kanjis, setKanjis] = useState<Kanji[]>([]);
   const [index, setIndex] = useState(0);
 
@@ -16,6 +17,7 @@ export function useDailyKanjis() {
   });
   const { fetch: postIncreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postIncreaseDailyProgress);
   const { fetch: postDecreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postDecreaseDailyProgress);
+  const { fetch: postCompleteDailyProgressFetch } = useApi<ApiResponse<null>, void>(postCompleteDailyProgress);
 
   useEffect(() => {
     if (!data || !data.result) return;
@@ -32,10 +34,9 @@ export function useDailyKanjis() {
     setIndex(today_kanji_index);
   }, [data]);
 
-
   const goNext = async () => {
     if (data?.result?.end_kanji_index) {
-      if (index + 1 >= data?.result?.end_kanji_index) return;
+      if (index + 1 > data?.result?.end_kanji_index) return;
       postIncreaseDailyProgressFetch();
       setIndex(index + 1);
     }
@@ -49,14 +50,22 @@ export function useDailyKanjis() {
     }
   };
 
+  const completeDailyProgress = () => {
+    postCompleteDailyProgressFetch()
+    setComplete(true)
+  }
+
   return {
     kanjis,
-    current: kanjis[index],
+    complete,
+    completeDailyProgress,
+    current: kanjis.find(k => k.position === index),
     hasNext: index < kanjis.length - 1,
     hasPrev: index > 0,
-    last_kanji_index: data?.result?.last_kanji_index ?? 0,
-    end_kanji_index: data?.result?.end_kanji_index ?? 0,
+    last_kanji_index: data?.result?.last_kanji_index,
+    end_kanji_index: data?.result?.end_kanji_index,
     today_kanji_index: index,
+    completed: data?.result?.completed,
     goNext,
     goPrev,
   };

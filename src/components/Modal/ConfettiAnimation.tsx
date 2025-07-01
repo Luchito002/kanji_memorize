@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import confettiAnimation from "../../../public/confetti.json"
+import confettiAnimation from "@/assets/confetti.json"
 import { useModalContext } from "./context/UseModalContext";
 import Modal from "./Modal";
 import Lottie from "lottie-react";

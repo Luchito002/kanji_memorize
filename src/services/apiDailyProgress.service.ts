@@ -62,3 +62,22 @@ export const postDecreaseDailyProgress = (): UseApiCall<ApiResponse<null>> => {
     controller,
   };
 }
+
+export const postCompleteDailyProgress = (): UseApiCall<ApiResponse<null>> => {
+  const controller = loadAbort();
+  const token = localStorage.getItem("token");
+
+  return {
+    call: axios.post<ApiResponse<null>>(
+      `${BASE_URL}/dailyprogress/complete-daily-progress`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      }
+    ),
+    controller,
+  };
+}
