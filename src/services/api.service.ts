@@ -2,18 +2,17 @@ const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import {
   LoginPayload,
-  LoginResponse,
+  TokenResponse,
   RegisterPayload,
-  RegisterResponse,
   UseApiCall
 } from "../models";
 import { loadAbort } from "../utilities";
 
-export const postRegisterUser = (payload: RegisterPayload): UseApiCall<RegisterResponse> => {
+export const postRegisterUser = (payload: RegisterPayload): UseApiCall<TokenResponse> => {
   const controller = loadAbort()
 
   return {
-    call: axios.post<RegisterResponse>(
+    call: axios.post<TokenResponse>(
       `${BASE_URL}/auth/register`,
       payload,
       { signal: controller.signal }
@@ -23,7 +22,7 @@ export const postRegisterUser = (payload: RegisterPayload): UseApiCall<RegisterR
 }
 
 
-export const postLoginUser = (payload: LoginPayload): UseApiCall<LoginResponse> => {
+export const postLoginUser = (payload: LoginPayload): UseApiCall<TokenResponse> => {
   const controller = loadAbort()
 
   const body = new URLSearchParams()
@@ -31,7 +30,7 @@ export const postLoginUser = (payload: LoginPayload): UseApiCall<LoginResponse> 
   body.append("password", payload.password)
 
   return {
-    call: axios.post<LoginResponse>(
+    call: axios.post<TokenResponse>(
       `${BASE_URL}/auth/login`,
       body,
       {

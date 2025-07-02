@@ -1,4 +1,4 @@
-import { Control, Controller, FieldErrors, useWatch } from "react-hook-form"
+import { Control, Controller, FieldErrors, FieldValues, Path, useWatch } from "react-hook-form"
 import {
   Select,
   SelectContent,
@@ -7,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue
 } from "./ui/select"
-import { FormValues } from "@/components/CustomForm"
 
 const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)
 const months = Array.from({ length: 12 }, (_, i) => i + 1)
@@ -16,14 +15,24 @@ function getDaysInMonth(month: number, year: number) {
   return new Date(year, month, 0).getDate()
 }
 
-type Props = {
-  control: Control<FormValues>
-  error?: FieldErrors<FormValues>
+type Props<T extends FieldValues> = {
+  control: Control<T>
+  error?: FieldErrors<T>
+  year: Path<T>
+  month: Path<T>
+  day: Path<T>
 }
 
-export default function DatePicker({ control, error }: Props) {
-  const selectedMonth = Number(useWatch({ control, name: "birthMonth" })) || 1
-  const selectedYear = Number(useWatch({ control, name: "birthYear" })) || new Date().getFullYear()
+export default function DatePicker<T extends FieldValues>({
+  control,
+  error,
+  year,
+  month,
+  day
+}: Props<T>) {
+
+  const selectedMonth = Number(useWatch({ control, name: month })) || 1
+  const selectedYear = Number(useWatch({ control, name: year })) || new Date().getFullYear()
   const maxDay = getDaysInMonth(selectedMonth, selectedYear)
   const days = Array.from({ length: maxDay }, (_, i) => i + 1)
 
@@ -33,7 +42,7 @@ export default function DatePicker({ control, error }: Props) {
         {/* Año */}
         <div className="flex flex-col">
           <Controller
-            name="birthYear"
+            name={year}
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
@@ -53,14 +62,14 @@ export default function DatePicker({ control, error }: Props) {
             )}
           />
           {error?.birthYear && (
-            <p className="mt-1 text-sm text-destructive">{error.birthYear.message}</p>
+            <p className="mt-1 text-sm text-destructive">{String(error[year]?.message)}</p>
           )}
         </div>
 
         {/* Mes */}
         <div className="flex flex-col">
           <Controller
-            name="birthMonth"
+            name={month}
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
@@ -80,14 +89,14 @@ export default function DatePicker({ control, error }: Props) {
             )}
           />
           {error?.birthMonth && (
-            <p className="mt-1 text-sm text-destructive">{error.birthMonth.message}</p>
+            <p className="mt-1 text-sm text-destructive">{String(error[month]?.message)}</p>
           )}
         </div>
 
         {/* Día */}
         <div className="flex flex-col">
           <Controller
-            name="birthDay"
+            name={day}
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
@@ -107,7 +116,7 @@ export default function DatePicker({ control, error }: Props) {
             )}
           />
           {error?.birthDay && (
-            <p className="mt-1 text-sm text-destructive">{error.birthDay.message}</p>
+            <p className="mt-1 text-sm text-destructive"> {String(error[day]?.message)}</p>
           )}
         </div>
       </div>

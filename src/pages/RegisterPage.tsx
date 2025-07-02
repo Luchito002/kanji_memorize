@@ -4,11 +4,13 @@ import InputForm from '@/components/CustomForm/CustomInput'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { useApi } from '@/hooks/useApi'
-import { RegisterPayload, RegisterResponse } from '@/models'
+import { RegisterPayload, TokenResponse, UserSettingsResponse } from '@/models'
 import { postRegisterUser } from '@/services/api.service'
 import { Link, useNavigate } from 'react-router-dom'
 import DatePicker from '@/components/date-picker'
 import { useEffect } from 'react'
+import { postCreateSettings } from '@/services/apiUserSettings.service'
+import { ApiResponse } from '@/types/api_response'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
@@ -25,7 +27,8 @@ export default function RegisterPage() {
     },
   })
 
-  const { loading, error, data, fetch } = useApi<RegisterResponse, RegisterPayload>(postRegisterUser)
+  const { loading, error, data, fetch: registerUserFetch } = useApi<TokenResponse, RegisterPayload>(postRegisterUser)
+  const { fetch: createSettingsFetch } = useApi<ApiResponse<UserSettingsResponse>, string>(postCreateSettings)
 
   useEffect(() => {
     if (data) {
@@ -33,7 +36,7 @@ export default function RegisterPage() {
     }
   }, [data, navigate])
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const birthdate = `${data.birthYear}-${data.birthMonth.padStart(2, "0")}-${data.birthDay.padStart(2, "0")}`
 
     const payload: RegisterPayload = {
@@ -41,7 +44,10 @@ export default function RegisterPage() {
       password: data.password,
       birthdate
     }
-    fetch(payload)
+    const dataRegister = await registerUserFetch(payload)
+    console.log(dataRegister.access_token)
+    localStorage.setItem("token", dataRegister.access_token);
+    await createSettingsFetch(dataRegister.access_token)
   }
 
   return (
@@ -63,7 +69,13 @@ export default function RegisterPage() {
           <InputForm name="confirmPassword" control={control} label="Confirmar contraseña" type="password" error={errors.confirmPassword} />
 
           <label className="block text-sm font-medium text-foreground mb-1 capitalize">Fecha de nacimiento</label>
-          <DatePicker control={control} error={errors} />
+          <DatePicker<FormValues>
+            control={control}
+            error={errors}
+            year='birthYear'
+            month='birthMonth'
+            day='birthDay'
+          />
         </div>
 
         {loading && <p className="text-sm text-primary mt-4 text-center">Enviando...</p>}

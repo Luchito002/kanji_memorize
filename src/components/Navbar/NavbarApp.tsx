@@ -18,9 +18,13 @@ export default function NavbarApp() {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center gap-6">
           <li><ModeToggle /></li>
-          <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
-          <li>{currentUser?.username}</li>
+          {currentUser ?
+            <li><Link to="/profile"><Button variant="outline" size="xl">{currentUser?.username}</Button></Link></li>
+            :
+            <li><Link to="/login"><Button variant="outline" size="xl">Iniciar Sesión</Button></Link></li>
+          }
         </ul>
+
 
         {/* Mobile Menu Button */}
         <button
@@ -42,8 +46,6 @@ export default function NavbarApp() {
       {open && (
         <div className="lg:hidden px-4 pb-4">
           <ul className="flex flex-col gap-4">
-            <li><Link to="/nuevo">Aprender</Link></li>
-            <li><Link to="/armar">Practicar</Link></li>
             <li><ModeToggle /></li>
             <li><Button variant="outline" className="w-full">Iniciar Sesión</Button></li>
           </ul>

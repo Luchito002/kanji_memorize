@@ -1,6 +1,4 @@
-export interface GetUserSettingsResponse {
+export interface UserSettingsResponse {
   theme: "light" | "dark" | "system";
-  show_kanji_on_home: boolean;
   daily_kanji_limit: number;
-  last_kanji_index: number;
 }

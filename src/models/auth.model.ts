@@ -1,5 +1,6 @@
-export interface RegisterResponse {
-  message: string,
+export interface TokenResponse {
+  access_token: string
+  token_type: string
 }
 
 export interface RegisterPayload {
@@ -11,9 +12,4 @@ export interface RegisterPayload {
 export interface LoginPayload {
   username: string
   password: string
-}
-
-export interface LoginResponse {
-  access_token: string
-  token_type: string
 }

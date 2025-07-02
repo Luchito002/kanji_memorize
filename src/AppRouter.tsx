@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import NewKanjiPage from "./pages/NewKanjiPage";
 import BuildKanjiPage from "./pages/BuildKanjiPage";
 import SelectKanjiPage from "./pages/SelectKanjiPage";
@@ -9,6 +9,7 @@ import AppLayout from "./layouts/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AuthLayout from "./layouts/AuthLayout";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function AppRouter() {
   return (
@@ -25,6 +26,7 @@ export default function AppRouter() {
       <Route element={<AppLayout />}>
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/nuevo" element={<NewKanjiPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/armar" element={<BuildKanjiPage />} />
         <Route path="/seleccionar" element={<SelectKanjiPage />} />
       </Route>
