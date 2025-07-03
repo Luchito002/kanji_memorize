@@ -31,14 +31,5 @@ export const loginSchema = z.object({
   password: z.string().min(1, "La contraseña es requerida"),
 });
 
-export const editProfileSchema = z.object({
-  name: z.string().min(1, "El nombre de usuario es requerido"),
-  birthDay: z.string().min(1, "Selecciona un día"),
-  birthMonth: z.string().min(1, "Selecciona un mes"),
-  birthYear: z.string().min(1, "Selecciona un año"),
-});
-
-
-export type EditProfileValues = z.infer<typeof editProfileSchema>;
 export type LoginFormValues = z.infer<typeof loginSchema>;
 export type FormValues = z.infer<typeof registerSchema>

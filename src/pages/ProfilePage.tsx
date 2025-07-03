@@ -1,33 +1,30 @@
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "@/redux/states";
 import EditProfile from "@/components/ProfilePage/EditProfile";
 import EditSettings from "@/components/ProfilePage/EditSettings";
+import EditTitle from "@/components/ProfilePage/EditTitle";
+import { useModalContext } from "@/components/Modal/context/UseModalContext";
+import LogoutModal from "@/components/ProfilePage/LogoutModal";
 
 export default function ProfilePage() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { setState } = useModalContext()
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(logout());
-    navigate("/login");
-  };
+  const handleClick = () => {
+    setState(true)
+  }
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8 space-y-8">
-      <h1 className="text-3xl font-semibold">Perfil</h1>
+    <div className="max-w-xl mx-auto px-4 py-8 space-y-8 flex flex-col ">
+      <EditTitle />
 
-      <div className="">
-        <EditProfile />
+      <EditProfile />
 
-        <EditSettings />
-      </div>
+      <EditSettings />
 
-      <Button variant="destructive" onClick={handleLogout}>
+      <Button variant="default" className="" onClick={handleClick}>
         Cerrar sesión
       </Button>
+
+      <LogoutModal />
     </div>
   );
 }

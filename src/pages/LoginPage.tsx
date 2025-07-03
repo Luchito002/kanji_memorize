@@ -4,7 +4,7 @@ import InputForm from '@/components/CustomForm/CustomInput';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useApi } from '@/hooks/useApi';
-import { LoginPayload, TokenResponse, UserMeResponse } from '@/models';
+import { LoginPayload, TokenResponse, UserResponse } from '@/models';
 import { postLoginUser } from '@/services/api.service';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -27,7 +27,7 @@ export default function LoginPage() {
   });
 
   const { loading, error, data, fetch } = useApi<TokenResponse, LoginPayload>(postLoginUser);
-  const { fetch: fetchUser, data: userData } = useApi<UserMeResponse, void>(getUserMe);
+  const { fetch: fetchUser, data: userData } = useApi<UserResponse, void>(getUserMe);
 
   useEffect(() => {
     if (data) {

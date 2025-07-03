@@ -1,6 +1,12 @@
 export type UserSettings = {
   id: number;
   user_id: number;
-  theme: "light" | "dark" | "system";
+  theme: Theme;
   daily_kanji_limit: number;
 };
+
+export enum Theme {
+  Light = "light",
+  Dark = "dark",
+  System = "system",
+}

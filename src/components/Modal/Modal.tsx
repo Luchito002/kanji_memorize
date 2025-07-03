@@ -18,9 +18,12 @@ export default function Modal({ children }: Props) {
   }
 
   return createPortal(
-    <div className="absolute left-0 top-0 w-full h-full flex flex-col items-center justify-center content-center z-50" ref={modalRef}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+      ref={modalRef}
+    >
       {children}
-    </div>
-    , modalRoot
+    </div>,
+    modalRoot
   )
 }

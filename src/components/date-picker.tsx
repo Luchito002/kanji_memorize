@@ -21,6 +21,9 @@ type Props<T extends FieldValues> = {
   year: Path<T>
   month: Path<T>
   day: Path<T>
+  defaultYear?: number
+  defaultMonth?: number
+  defaultDay?: number
 }
 
 export default function DatePicker<T extends FieldValues>({
@@ -28,11 +31,17 @@ export default function DatePicker<T extends FieldValues>({
   error,
   year,
   month,
-  day
+  day,
+  defaultYear,
+  defaultMonth,
+  defaultDay,
 }: Props<T>) {
+  const selectedMonth =
+    Number(useWatch({ control, name: month })) || defaultMonth || 1
 
-  const selectedMonth = Number(useWatch({ control, name: month })) || 1
-  const selectedYear = Number(useWatch({ control, name: year })) || new Date().getFullYear()
+  const selectedYear =
+    Number(useWatch({ control, name: year })) || defaultYear || new Date().getFullYear()
+
   const maxDay = getDaysInMonth(selectedMonth, selectedYear)
   const days = Array.from({ length: maxDay }, (_, i) => i + 1)
 
@@ -40,13 +49,13 @@ export default function DatePicker<T extends FieldValues>({
     <div className="space-y-2">
       <div className="flex gap-4">
         {/* Año */}
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1">
           <Controller
             name={year}
             control={control}
             render={({ field }) => (
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-[120px]">
+              <Select value={field.value || defaultYear?.toString()} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Año" />
                 </SelectTrigger>
                 <SelectContent>
@@ -67,13 +76,13 @@ export default function DatePicker<T extends FieldValues>({
         </div>
 
         {/* Mes */}
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1">
           <Controller
             name={month}
             control={control}
             render={({ field }) => (
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-[120px]">
+              <Select value={field.value || defaultMonth?.toString()} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Mes" />
                 </SelectTrigger>
                 <SelectContent>
@@ -94,13 +103,13 @@ export default function DatePicker<T extends FieldValues>({
         </div>
 
         {/* Día */}
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1">
           <Controller
             name={day}
             control={control}
             render={({ field }) => (
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-[100px]">
+              <Select value={field.value || defaultDay?.toString()} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Día" />
                 </SelectTrigger>
                 <SelectContent>
@@ -116,7 +125,7 @@ export default function DatePicker<T extends FieldValues>({
             )}
           />
           {error?.birthDay && (
-            <p className="mt-1 text-sm text-destructive"> {String(error[day]?.message)}</p>
+            <p className="mt-1 text-sm text-destructive">{String(error[day]?.message)}</p>
           )}
         </div>
       </div>

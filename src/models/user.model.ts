@@ -5,9 +5,13 @@ export interface User {
   created_at: string;
 }
 
-export interface UserMeResponse {
-  id: string;
+export interface UserResponse {
   username: string;
   birthdate: string;
   created_at: string;
+}
+
+export interface UserEditRequest {
+  username: string;
+  birthdate: string;
 }

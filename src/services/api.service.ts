@@ -21,7 +21,6 @@ export const postRegisterUser = (payload: RegisterPayload): UseApiCall<TokenResp
   }
 }
 
-
 export const postLoginUser = (payload: LoginPayload): UseApiCall<TokenResponse> => {
   const controller = loadAbort()
 

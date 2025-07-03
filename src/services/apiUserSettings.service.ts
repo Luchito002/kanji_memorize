@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import { loadAbort } from "../utilities";
-import { UseApiCall, UserSettingsResponse } from "@/models";
+import { UseApiCall, UserSettingsEditRequest, UserSettingsResponse } from "@/models";
 import { ApiResponse } from "@/types/api_response";
 
 export const getUserSettings = (): UseApiCall<ApiResponse<UserSettingsResponse>> => {
@@ -39,3 +39,22 @@ export const postCreateSettings = (token: string): UseApiCall<ApiResponse<UserSe
     controller,
   };
 };
+
+export const putEditSettings = (body: UserSettingsEditRequest): UseApiCall<ApiResponse<UserSettingsResponse>> => {
+  const controller = loadAbort();
+  const token = localStorage.getItem("token");
+
+  return {
+    call: axios.put<ApiResponse<UserSettingsResponse>>(
+      `${BASE_URL}/userssettings/edit-settings`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal
+      }
+    ),
+    controller,
+  }
+}

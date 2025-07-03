@@ -22,6 +22,11 @@ const InputForm = <T extends FieldValues>({ name, control, label, type = "text",
             id={name}
             type={type}
             {...field}
+            value={field.value ?? ""}
+            onChange={(e) => {
+              const value = type === "number" ? e.target.valueAsNumber : e.target.value
+              field.onChange(value)
+            }}
             className={`w-full px-4 py-2 border rounded-xl bg-input text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${error ? "border-destructive" : "border-border"
               }`}
             placeholder={label}

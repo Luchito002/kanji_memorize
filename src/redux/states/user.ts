@@ -1,8 +1,8 @@
-import { User } from '@/models';
+import { UserResponse } from '@/models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  currentUser: User | null;
+  currentUser: UserResponse | null;
   isLoading: boolean;
   error: string | null;
 }
@@ -17,7 +17,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginSuccess(state, action: PayloadAction<User>) {
+    loginSuccess(state, action: PayloadAction<UserResponse>) {
       state.currentUser = action.payload;
       state.isLoading = false;
       state.error = null;
