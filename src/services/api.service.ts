@@ -7,12 +7,13 @@ import {
   UseApiCall
 } from "../models";
 import { loadAbort } from "../utilities";
+import { ApiResponse } from "@/types/api_response";
 
-export const postRegisterUser = (payload: RegisterPayload): UseApiCall<TokenResponse> => {
+export const postRegisterUser = (payload: RegisterPayload): UseApiCall<ApiResponse<TokenResponse>> => {
   const controller = loadAbort()
 
   return {
-    call: axios.post<TokenResponse>(
+    call: axios.post<ApiResponse<TokenResponse>>(
       `${BASE_URL}/auth/register`,
       payload,
       { signal: controller.signal }

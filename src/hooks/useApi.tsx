@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { UseApiCall } from "../models";
+import { AxiosError } from "axios";
+import { ApiResponse } from "@/types/api_response";
 
 type UseApiOptions<P> = {
   autoFetch?: boolean;
@@ -7,7 +9,7 @@ type UseApiOptions<P> = {
 };
 
 type Data<T> = T | null;
-type CustomError = Error | null;
+type CustomError = AxiosError<ApiResponse<null>> | null;
 
 interface UseApiResult<T, P> {
   loading: boolean;
@@ -34,6 +36,7 @@ export const useApi = <T, P>(
     const { call, controller } = apiCall(param);
     controllerRef.current = controller;
 
+    setError(null);
     setLoading(true);
 
     return new Promise((resolve, reject) => {

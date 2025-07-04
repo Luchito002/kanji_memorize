@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { editProfileSchema, EditProfileValues } from "./";
@@ -17,14 +17,16 @@ import { AppDispatch } from "@/redux/store";
 import { loginSuccess } from "@/redux/states";
 
 export default function EditProfile() {
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const currentUser = useAppSelector((state) => state.user.currentUser);
-  const { fetch: editUserFetch, loading, data } = useApi<ApiResponse<UserResponse>, UserEditRequest>(putEditUser)
+  const { fetch: editUserFetch, loading, data, error } = useApi<ApiResponse<UserResponse>, UserEditRequest>(putEditUser);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
     reset,
   } = useForm<EditProfileValues>({
     resolver: zodResolver(editProfileSchema),
@@ -44,12 +46,29 @@ export default function EditProfile() {
     }
   }, [currentUser, reset]);
 
+  useEffect(() => {
+    if (error?.response?.data?.message === "Username already exists") {
+      setError("name", {
+        type: "manual",
+        message: "El nombre de usuario ya está en uso",
+      });
+    }
+  }, [error, setError]);
+
+  useEffect(() => {
+    if (data) {
+      setShowSuccess(true);
+    }
+    const timer = setTimeout(() => setShowSuccess(false), 3000);
+    return () => clearTimeout(timer);
+  }, [data]);
+
   const onSubmit: SubmitHandler<EditProfileValues> = async (data) => {
-    const birthdate = `${data.birthYear}-${data.birthMonth.padStart(2, "0")}-${data.birthDay.padStart(2, "0")}`
+    const birthdate = `${data.birthYear}-${data.birthMonth.padStart(2, "0")}-${data.birthDay.padStart(2, "0")}`;
     const updatedUser = await editUserFetch({
       username: data.name,
-      birthdate
-    })
+      birthdate,
+    });
 
     if (updatedUser.result) {
       dispatch(loginSuccess(updatedUser.result));
@@ -89,7 +108,7 @@ export default function EditProfile() {
           : "—"}
       </p>
       {loading && <LoadingAnimationSmall label="Actualizando datos" />}
-      {data && <SuccessfullyAnimationSmall label="Datos actualizados correctamente" />}
+      {showSuccess && <SuccessfullyAnimationSmall label="Datos actualizados correctamente" />}
     </EditContainer>
   );
 }

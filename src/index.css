@@ -15,6 +15,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-form: var(--form);
   --color-kanji-border: var(--kanji-border);
   --color-kanji-background: var(--kanji-background);
   --color-kanji-foreground: var(--kanji-foreground);
@@ -52,6 +53,8 @@
 :root {
   --background: #FDFCF9;
   --foreground: #1B1B1F;
+
+  --form: #FFFFFF;
 
   --card: #FFFFFF;
   --card-foreground: #2E2E33;
@@ -101,6 +104,8 @@
 .dark {
   --background: #141314;
   --foreground: #F1EDEA;
+
+  --form: #FFFFFF;
 
   --card: #1F1E1F;
   --card-foreground: #F1EDEA;

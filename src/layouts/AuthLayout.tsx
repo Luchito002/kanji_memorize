@@ -12,7 +12,6 @@ export default function AuthLayout() {
         alt="Sakuras"
         className="dark:hidden flex fixed bottom-10 left-10 h-[200px] -z-10"
       />
-
       <img
         src={sakura}
         alt="Sakuras"
@@ -21,16 +20,17 @@ export default function AuthLayout() {
       <div className="dark:hidden flex absolute inset-0 -z-30 pointer-events-none">
         <div className="w-full h-full bg-[radial-gradient(circle,_white_0%,_#FFEAEA_40%)] blur-3xl" />
       </div>
+
+
       <img
         src={fujiDarkSmall}
         alt="Fuji dark big"
-        className="dark:flex hidden fixed left-1/2 -z-20 translate-x-[-50%] w-full h-[40rem] -bottom-20"
+        className="dark:flex hidden fixed -z-20 sm:-bottom-80 -bottom-20"
       />
       <div className="dark:flex hidden fixed inset-0 -z-30 pointer-events-none">
         <div className="w-full h-full bg-[radial-gradient(circle,_#301D34_0%,_#1E151F_70%)] blur-xl" />
       </div>
       <Starfield />
-
       <Outlet />
     </>
   )

@@ -2,16 +2,18 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { LoginFormValues, loginSchema } from "@/components/CustomForm"
 import InputForm from '@/components/CustomForm/CustomInput';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@/components/ui/button';
 import { useApi } from '@/hooks/useApi';
 import { LoginPayload, TokenResponse, UserResponse } from '@/models';
 import { postLoginUser } from '@/services/api.service';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getUserMe } from '@/services/apiUser.service';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { loginSuccess } from '@/redux/states';
+import LoadingAnimationSmall from '@/components/Animations/loading-animation-small';
+import SuccessfullyAnimationSmall from '@/components/Animations/successfully-animation-small';
+import CustomFormAuth from '@/components/AuthPages/CustomFormAuth';
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -43,6 +45,7 @@ export default function LoginPage() {
     }
   }, [userData, dispatch, navigate]);
 
+
   const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
     const payload: LoginPayload = {
       username: data.name,
@@ -53,31 +56,20 @@ export default function LoginPage() {
   }
 
   return (
-    <form
+    <CustomFormAuth
       onSubmit={handleSubmit(onSubmit)}
-      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 z-10"
+      titleForm='Iniciar sesión'
+      submitButtonLabel='Iniciar sesión'
+      changeFormQuestion='¿No tienes una cuenta?'
+      changeFormButtonLabel='REGISTRATE'
+      link='/register'
     >
-      <div>
-        ¿No tienes una cuenta?
-        <Link to="/register"> <Button variant="outline" size="lg">REGISTRATE</Button></Link>
-      </div>
+      <InputForm name="name" control={control} label="Nombre de usuario" type="text" error={errors.name} />
+      <InputForm name="password" control={control} label="Contraseña" type="password" error={errors.password} />
 
-      <div className="w-full max-w-md bg-card text-card-foreground p-8 rounded-2xl shadow-md border border-border">
-        <h1 className="text-2xl font-semibold mb-6 text-center">Iniciar sesión</h1>
-
-        <div className="space-y-4">
-          <InputForm name="name" control={control} label="Nombre de usuario" type="text" error={errors.name} />
-          <InputForm name="password" control={control} label="Contraseña" type="password" error={errors.password} />
-        </div>
-
-        {loading && <p className="text-sm text-primary mt-4 text-center">Enviando...</p>}
-        {error && <p className="text-sm text-destructive mt-4 text-center">{error.message}</p>}
-        {data && <p className="text-sm text-success mt-4 text-center">¡Inicio exitoso!</p>}
-
-        <Button type="submit" className="w-full mt-6 rounded-xl py-2 text-base font-medium">
-          Continuar
-        </Button>
-      </div>
-    </form>
+      {loading && <LoadingAnimationSmall label="Iniciando Sesión" />}
+      {error && <p className="text-sm text-destructive mt-4 text-center">{error?.response?.data.message}</p>}
+      {data && <SuccessfullyAnimationSmall label="¡Inicio exitoso!" />}
+    </CustomFormAuth >
   )
 }

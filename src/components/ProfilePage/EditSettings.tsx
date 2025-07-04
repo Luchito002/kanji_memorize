@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getUserSettings, putEditSettings } from "@/services/apiUserSettings.service"
 import { useApi } from "@/hooks/useApi"
 import { ApiResponse } from "@/types/api_response"
@@ -14,6 +14,7 @@ import SuccessfullyAnimationSmall from "../Animations/successfully-animation-sma
 import LoadingAnimationSmall from "../Animations/loading-animation-small"
 
 export default function EditSettings() {
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const { fetch: editSettingsFetch, data, loading } = useApi<ApiResponse<UserSettingsResponse>, UserSettingsEditRequest>(putEditSettings)
   const { data: userSettings } = useApi<ApiResponse<UserSettingsResponse>, null>(getUserSettings, {
     autoFetch: true,
@@ -40,6 +41,14 @@ export default function EditSettings() {
       })
     }
   }, [userSettings, reset])
+
+  useEffect(() => {
+    if (data) {
+      setShowSuccess(true);
+    }
+    const timer = setTimeout(() => setShowSuccess(false), 3000);
+    return () => clearTimeout(timer);
+  }, [data])
 
   const onSubmit: SubmitHandler<EditSettingsValues> = async (data) => {
     await editSettingsFetch({
@@ -77,7 +86,7 @@ export default function EditSettings() {
       />
 
       {loading && <LoadingAnimationSmall label="Actualizando datos" />}
-      {data && <SuccessfullyAnimationSmall label="Datos actualizados correctamente" />}
+      {showSuccess && <SuccessfullyAnimationSmall label="Datos actualizados correctamente" />}
     </EditContainer>
   )
 }
