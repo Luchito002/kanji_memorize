@@ -81,3 +81,23 @@ export const postCompleteDailyProgress = (): UseApiCall<ApiResponse<null>> => {
     controller,
   };
 }
+
+
+export const putIncreaseEndKanjiIndex = (increment: number): UseApiCall<ApiResponse<null>> => {
+  const controller = loadAbort();
+  const token = localStorage.getItem("token");
+
+  return {
+    call: axios.put<ApiResponse<null>>(
+      `${BASE_URL}/dailyprogress/increase-end-kanji-index`,
+      { increment },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      }
+    ),
+    controller,
+  };
+}

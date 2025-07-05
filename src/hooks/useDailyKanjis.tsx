@@ -11,10 +11,7 @@ export function useDailyKanjis() {
   const [kanjis, setKanjis] = useState<Kanji[]>([]);
   const [index, setIndex] = useState(0);
 
-  const { data } = useApi<ApiResponse<DailyProgressResponse>, void>(postCreateDailyProgress, {
-    autoFetch: true,
-    params: undefined,
-  });
+  const { data } = useApi<ApiResponse<DailyProgressResponse>, void>(postCreateDailyProgress, { autoFetch: true, params: undefined });
   const { fetch: postIncreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postIncreaseDailyProgress);
   const { fetch: postDecreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postDecreaseDailyProgress);
   const { fetch: postCompleteDailyProgressFetch } = useApi<ApiResponse<null>, void>(postCompleteDailyProgress);
@@ -22,48 +19,42 @@ export function useDailyKanjis() {
   useEffect(() => {
     if (!data || !data.result) return;
 
-    const { last_kanji_index, end_kanji_index, today_kanji_index } = data.result;
+    const { start_kanji_index, end_kanji_index, today_kanji_index} = data.result;
 
-    // Index validate
-    if (last_kanji_index >= end_kanji_index) return;
+    if (start_kanji_index >= end_kanji_index) return;
 
-    // Take JSON segment elements
-    const dailyKanjis = kanjiJson.slice(last_kanji_index, end_kanji_index);
+    const dailyKanjis = kanjiJson.slice(start_kanji_index, end_kanji_index);
+    console.log(dailyKanjis)
     setKanjis(dailyKanjis);
 
-    setIndex(today_kanji_index);
+    setIndex(today_kanji_index)
+
   }, [data]);
 
   const goNext = async () => {
-    if (data?.result?.end_kanji_index) {
-      if (index + 1 > data?.result?.end_kanji_index) return;
-      postIncreaseDailyProgressFetch();
-      setIndex(index + 1);
-    }
+    if (index >= kanjis.length) return;
+    await postIncreaseDailyProgressFetch();
+    setIndex(index + 1);
   };
 
   const goPrev = async () => {
-    if (data?.result?.last_kanji_index) {
-      if (index <= data?.result?.last_kanji_index) return;
-      postDecreaseDailyProgressFetch();
-      setIndex(index - 1);
-    }
+    if (index <= kanjis[0].position) return;
+    await postDecreaseDailyProgressFetch();
+    setIndex(index - 1);
   };
 
-  const completeDailyProgress = () => {
-    postCompleteDailyProgressFetch()
-    setComplete(true)
-  }
+  const completeDailyProgress = async () => {
+    await postIncreaseDailyProgressFetch();
+    await postCompleteDailyProgressFetch();
+    setComplete(true);
+  };
 
   return {
-    kanjis,
     complete,
     completeDailyProgress,
-    current: kanjis.find(k => k.position === index),
-    hasNext: index < kanjis.length - 1,
-    hasPrev: index > 0,
-    last_kanji_index: data?.result?.last_kanji_index,
-    end_kanji_index: data?.result?.end_kanji_index,
+    current: kanjis[index] ?? null,
+    start_kanji_index: data?.result?.start_kanji_index,
+    end_kanji_index: kanjis.length,
     today_kanji_index: index,
     completed: data?.result?.completed,
     goNext,

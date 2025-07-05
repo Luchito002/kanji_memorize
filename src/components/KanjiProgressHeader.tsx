@@ -17,7 +17,7 @@ export default function KanjiProgressHeader({ current, max, min}: Props) {
 
   return (
     <div className="w-full flex items-center justify-between mb-6 gap-4">
-      <Progress current={current} max={max} min={min}/>
+      <Progress current={current} max={max - 1} min={min}/>
 
       {/* Exit button */}
       <button

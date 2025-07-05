@@ -16,7 +16,7 @@ export default function CustomFormAuth({ children, titleForm, submitButtonLabel,
   return (
     <form
       onSubmit={onSubmit}
-      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4"
+      className="min-h-screen flex flex-col gap-4 items-center justify-center px-4 my-4"
     >
       <div className="w-full max-w-md text-card-foreground p-8 rounded-2xl shadow-md border border-border">
         <h1 className="text-2xl font-semibold mb-6 text-center">{titleForm}</h1>
