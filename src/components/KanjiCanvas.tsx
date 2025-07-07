@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useApi } from "@/hooks/useApi";
 import { validateStroke } from "@/services/apiKanjiMatch";
 import { ApiResponse } from "@/types/api_response";
@@ -14,9 +14,13 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
   const [currentStroke, setCurrentStroke] = useState<number[][]>([]);
   const [drawing, setDrawing] = useState(false);
   const [currentStrokeIndex, setCurrentStrokeIndex] = useState(0);
-  const [targetKanji, setTargetKanji] = useState("心");
+  const [targetKanji, setTargetKanji] = useState("望");
 
-  const { fetch } = useApi<ApiResponse<StrokeValidationResult>, StrokeInput>(validateStroke);
+  const { fetch, data } = useApi<ApiResponse<StrokeValidationResult>, StrokeInput>(validateStroke);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const getPos = (e: MouseEvent | TouchEvent): [number, number] => {
     const rect = canvasRef.current!.getBoundingClientRect();
@@ -29,7 +33,9 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
     return [0, 0];
   };
 
-  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const startDrawing = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
     const [x, y] = getPos(e.nativeEvent);
     setCurrentStroke([[x, y]]);
     setDrawing(true);
@@ -38,22 +44,22 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
   const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!drawing) return;
     const [x, y] = getPos(e.nativeEvent);
+
     setCurrentStroke((prev) => {
       const newStroke = [...prev, [x, y]];
-      const ctx = canvasRef.current!.getContext("2d");
-      if (ctx && prev.length > 0) {
-        ctx.lineJoin = "round";
-        ctx.lineCap = "round";
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        const [prevX, prevY] = prev[prev.length - 1];
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-      }
+      redrawCanvas([...strokes, newStroke]);
       return newStroke;
     });
+  };
+
+  const scaleStrokeToCanvas = (points: number[][], canvasWidth: number, canvasHeight: number): number[][] => {
+    const scaleX = canvasWidth / 109;
+    const scaleY = canvasHeight / 109;
+
+    return points.map(([x, y]) => [
+      x * scaleX,
+      y * scaleY,
+    ]);
   };
 
   const endDrawing = async () => {
@@ -67,12 +73,6 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
     const [x2, y2] = currentStroke[currentStroke.length - 1];
     const line: [number, number, number, number] = [x1, y1, x2, y2];
 
-
-    console.log({
-      kanji: targetKanji,
-      stroke_index: currentStrokeIndex,
-      user_line: line,
-    })
     try {
       const res = await fetch({
         kanji: targetKanji,
@@ -83,15 +83,11 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
       if (res.result?.ok) {
         const data = res.result;
 
-        // Mostrar corrección si existe
-        const corrected = data.corrected;
-        const stroke = [
-          [corrected[0], corrected[1]],
-          [corrected[2], corrected[3]],
-        ];
+        // Escalar puntos del backend
+        const scaled = scaleStrokeToCanvas(data.corrected, 300, 300);
 
-        setStrokes((prev) => [...prev, stroke]);
-        redrawCanvas([...strokes, stroke]);
+        setStrokes((prev) => [...prev, scaled]);
+        redrawCanvas([...strokes, scaled]);
 
         setCurrentStrokeIndex((prev) => prev + 1);
 
@@ -132,11 +128,17 @@ export default function KanjiCanvas({ onMatchRequest }: Props) {
 
     for (const stroke of allStrokes) {
       if (stroke.length < 2) continue;
+
       ctx.beginPath();
       ctx.moveTo(stroke[0][0], stroke[0][1]);
-      for (let i = 1; i < stroke.length; i++) {
-        ctx.lineTo(stroke[i][0], stroke[i][1]);
+
+      for (let i = 1; i < stroke.length - 1; i++) {
+        const midX = (stroke[i][0] + stroke[i + 1][0]) / 2;
+        const midY = (stroke[i][1] + stroke[i + 1][1]) / 2;
+        ctx.quadraticCurveTo(stroke[i][0], stroke[i][1], midX, midY);
       }
+
+      ctx.lineTo(stroke[stroke.length - 1][0], stroke[stroke.length - 1][1]);
       ctx.stroke();
     }
   };

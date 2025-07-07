@@ -21,6 +21,6 @@ export interface StrokeInput {
 export interface StrokeValidationResult{
   ok: boolean;
   message: string;
-  corrected: number[];
+  corrected: number[][];
   done: boolean;
 }
