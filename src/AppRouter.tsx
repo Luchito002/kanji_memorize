@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AuthLayout from "./layouts/AuthLayout";
 import ProfilePage from "./pages/ProfilePage";
+import SrsPage from "./pages/SrsPage";
 
 export default function AppRouter() {
   return (
@@ -25,10 +26,11 @@ export default function AppRouter() {
 
       <Route element={<AppLayout />}>
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/nuevo" element={<NewKanjiPage />} />
+        <Route path="/new" element={<NewKanjiPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/armar" element={<BuildKanjiPage />} />
         <Route path="/seleccionar" element={<SelectKanjiPage />} />
+        <Route path="/srs" element={<SrsPage />} />
       </Route>
 
       <Route path="*" element={<h1>Not Found</h1>} />

@@ -14,10 +14,10 @@ export default function MenuPage() {
       <LastKanjiLearned />
 
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <QuickAction icon="📘" label="Aprender nuevos kanji" to="/nuevo" />
-        <QuickAction icon="🔁" label="Revisar SRS" to="" />
-        <QuickAction icon="📝" label="Test rápido" to="/practicar" />
-        <QuickAction icon="📊" label="Ver progreso" to="/progreso" />
+        <QuickAction icon="📘" label="Aprender nuevos kanji" to="/new" />
+        <QuickAction icon="🔁" label="Revisar SRS" to="/srs" />
+        <QuickAction icon="📝" label="Test rápido" to="/test" />
+        <QuickAction icon="📊" label="Ver progreso" to="/progress" />
       </section>
 
       <StreakGoal />

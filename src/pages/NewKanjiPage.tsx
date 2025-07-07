@@ -1,4 +1,4 @@
-import KanjiContainer from "@/components/KanjiContainer";
+import { KanjiContainer, KanjiContainerContent, KanjiContainerFooter, KanjiContainerHeader } from "@/components/KanjiContainer";
 import KanjiProgressHeader from "@/components/KanjiProgressHeader";
 import LoadingAnimation from "@/components/loading-animation";
 import NewKanjiCard from "@/components/NewKanjiPage/NewKanjiCard";
@@ -27,21 +27,27 @@ export default function NewKanjiPage() {
   if (!current) return <LoadingAnimation label="Cargando Kanjis" />
 
   return (
-    <KanjiContainer
-      header={<KanjiProgressHeader
-        min={0}
-        current={today_kanji_index}
-        max={end_kanji_index}
-      />}
+    <KanjiContainer>
+      <KanjiContainerHeader>
+        <KanjiProgressHeader
+          min={0}
+          current={today_kanji_index}
+          max={end_kanji_index}
+        />
+      </KanjiContainerHeader>
 
-      footer={<NewKanjiFooter
-        next={goNext}
-        previous={goPrev}
-        complete={today_kanji_index + 1 === end_kanji_index ? false : true}
-        completeFunction={completeDailyProgress}
-      />}
-    >
-      <NewKanjiCard kanji={current} />
+      <KanjiContainerContent>
+        <NewKanjiCard kanji={current} />
+      </KanjiContainerContent>
+
+      <KanjiContainerFooter>
+        <NewKanjiFooter
+          next={goNext}
+          previous={goPrev}
+          complete={today_kanji_index + 1 === end_kanji_index ? false : true}
+          completeFunction={completeDailyProgress}
+        />
+      </KanjiContainerFooter>
     </KanjiContainer>
   )
 }

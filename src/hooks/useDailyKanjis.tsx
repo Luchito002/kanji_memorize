@@ -33,12 +33,12 @@ export function useDailyKanjis() {
 
   const goNext = async () => {
     if (index >= kanjis.length) return;
-    await postIncreaseDailyProgressFetch();
     setIndex(index + 1);
+    await postIncreaseDailyProgressFetch();
   };
 
   const goPrev = async () => {
-    if (index <= kanjis[0].position) return;
+    if (index <= 0) return;
     await postDecreaseDailyProgressFetch();
     setIndex(index - 1);
   };

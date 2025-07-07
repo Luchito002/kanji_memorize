@@ -3,7 +3,7 @@ import "./AppLayout.css";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useEffect } from "react";
 import { useApi } from "@/hooks/useApi";
-import { UserMeResponse } from "@/models";
+import { UserResponse } from "@/models";
 import { getUserMe } from "@/services/apiUser.service";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/redux/states";
@@ -12,9 +12,9 @@ export default function AppLayout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useAppSelector((state) => state.user.currentUser);
-  const { fetch: fetchUser, data: userData } = useApi<UserMeResponse, void>(
+  const { fetch: fetchUser, data: userData } = useApi<UserResponse, void>(
     getUserMe,
-    { autoFetch: false, params: undefined } // muy importante
+    { autoFetch: false, params: undefined }
   );
 
   // Si hay token y no hay currentUser, traemos el usuario
