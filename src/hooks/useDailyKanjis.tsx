@@ -4,7 +4,7 @@ import { Kanji } from "@/types/kanji";
 import { useApi } from "./useApi";
 import { ApiResponse } from "@/types/api_response";
 import { postCreateDailyProgress, postIncreaseDailyProgress, postDecreaseDailyProgress, postCompleteDailyProgress } from "@/services/apiDailyProgress.service";
-import { DailyProgressResponse } from "@/models/daily_progress.model";
+import { DailyProgressResponse, KanjiCharRequest } from "@/models/daily_progress.model";
 
 export function useDailyKanjis() {
   const [complete, setComplete] = useState<boolean>(false);
@@ -12,8 +12,8 @@ export function useDailyKanjis() {
   const [index, setIndex] = useState(0);
 
   const { data } = useApi<ApiResponse<DailyProgressResponse>, void>(postCreateDailyProgress, { autoFetch: true, params: undefined });
-  const { fetch: postIncreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postIncreaseDailyProgress);
-  const { fetch: postDecreaseDailyProgressFetch } = useApi<ApiResponse<null>, void>(postDecreaseDailyProgress);
+  const { fetch: postIncreaseDailyProgressFetch } = useApi<ApiResponse<null>, KanjiCharRequest>(postIncreaseDailyProgress);
+  const { fetch: postDecreaseDailyProgressFetch } = useApi<ApiResponse<null>, KanjiCharRequest>(postDecreaseDailyProgress);
   const { fetch: postCompleteDailyProgressFetch } = useApi<ApiResponse<null>, void>(postCompleteDailyProgress);
 
   useEffect(() => {
@@ -24,27 +24,26 @@ export function useDailyKanjis() {
     if (start_kanji_index >= end_kanji_index) return;
 
     const dailyKanjis = kanjiJson.slice(start_kanji_index, end_kanji_index);
-    console.log(dailyKanjis)
     setKanjis(dailyKanjis);
 
     setIndex(today_kanji_index)
 
   }, [data]);
 
-  const goNext = async () => {
+  const goNext = async (char: string) => {
     if (index >= kanjis.length) return;
     setIndex(index + 1);
-    await postIncreaseDailyProgressFetch();
+    await postIncreaseDailyProgressFetch({kanji_char: char});
   };
 
-  const goPrev = async () => {
+  const goPrev = async (char: string) => {
     if (index <= 0) return;
-    await postDecreaseDailyProgressFetch();
+    await postDecreaseDailyProgressFetch({kanji_char: char});
     setIndex(index - 1);
   };
 
-  const completeDailyProgress = async () => {
-    await postIncreaseDailyProgressFetch();
+  const completeDailyProgress = async (char: string) => {
+    await postIncreaseDailyProgressFetch({kanji_char: char});
     await postCompleteDailyProgressFetch();
     setComplete(true);
   };

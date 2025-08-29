@@ -4,3 +4,8 @@ export interface DailyProgressResponse {
   today_kanji_index: number
   completed: boolean
 }
+
+
+export interface KanjiCharRequest {
+  kanji_char: string
+}

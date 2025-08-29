@@ -1,19 +1,17 @@
 import KanjiCanvas from "@/components/KanjiCanvas";
 import { KanjiContainer, KanjiContainerContent, KanjiContainerFooter, KanjiContainerHeader } from "@/components/KanjiContainer";
+import KanjiMeanings from "@/components/KanjiMeanings";
 import KanjiProgressHeader from "@/components/KanjiProgressHeader";
+import LoadingAnimation from "@/components/loading-animation";
 import { Button } from "@/components/ui/button";
-import { useKanjiMatch } from "@/hooks/useKanjiMatch";
+import { useSrs } from "@/hooks/useSrs";
 
 export default function SrsPage() {
-  const { sendToBackend, matches } = useKanjiMatch();
+  const { dueKanjis, currentKanji } = useSrs()
 
-  const handleMatch = async (lines: number[][]) => {
-    await sendToBackend({ strokes: lines });
-    if (matches && matches.length > 0) {
-      const best = matches[0];
-      alert(`¿Tal vez dibujaste?: ${best.kanji} (${best.score.toFixed(1)}%)`);
-    }
-  };
+  if (!currentKanji) return <LoadingAnimation label="Cargando Kanjis" />
+
+  console.log(dueKanjis)
 
   return (
     <KanjiContainer>
@@ -27,16 +25,9 @@ export default function SrsPage() {
 
 
       <KanjiContainerContent>
-        <div className="flex justify-center items-center gap-4">
-          <KanjiCanvas onMatchRequest={handleMatch} />
-        </div>
-        <div className="flex gap-5">
-          {matches &&
-
-            matches.map((match) => (
-              <span>{match.kanji}</span>
-            ))
-          }
+        <div className="flex flex-col justify-center items-center gap-4">
+          <KanjiMeanings meanings={currentKanji.meaning} />
+          <KanjiCanvas kanjiCharac={currentKanji.kanji_char} />
         </div>
       </KanjiContainerContent>
 

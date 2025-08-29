@@ -38,6 +38,7 @@ export default function EditSettings() {
       reset({
         theme: userSettings.result.theme,
         daily_kanji_limit: userSettings.result.daily_kanji_limit,
+        daily_srs_limit: userSettings.result.daily_srs_limit,
       })
     }
   }, [userSettings, reset])
@@ -51,9 +52,17 @@ export default function EditSettings() {
   }, [data])
 
   const onSubmit: SubmitHandler<EditSettingsValues> = async (data) => {
+    console.log({
+      theme: data.theme,
+      daily_kanji_limit: data.daily_kanji_limit,
+      daily_srs_limit: data.daily_srs_limit,
+    })
+
+
     await editSettingsFetch({
       theme: data.theme,
       daily_kanji_limit: data.daily_kanji_limit,
+      daily_srs_limit: data.daily_srs_limit,
     })
   }
 
@@ -83,6 +92,14 @@ export default function EditSettings() {
         label="Límite diario de kanji"
         type="number"
         error={errors.daily_kanji_limit}
+      />
+
+      <InputForm
+        name="daily_srs_limit"
+        control={control}
+        label="Límite diario de Repaso"
+        type="number"
+        error={errors.daily_srs_limit}
       />
 
       {loading && <LoadingAnimationSmall label="Actualizando datos" />}

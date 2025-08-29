@@ -21,6 +21,14 @@ export const editSettingsSchema = z.object({
     .int("El número debe ser entero.")
     .min(10, "El límite debe ser de al menos 10 kanji por día.")
     .max(100, "El límite no puede superar los 100 kanji por día."),
+  daily_srs_limit: z
+    .number({
+      required_error: "Debes ingresar un límite diario de Repaso.",
+      invalid_type_error: "El límite debe ser un número.",
+    })
+    .int("El número debe ser entero.")
+    .min(10, "El límite debe ser de al menos 10 kanji por día.")
+    .max(100, "El límite no puede superar los 100 kanji por día."),
 })
 
 export type EditSettingsValues = z.infer<typeof editSettingsSchema>;

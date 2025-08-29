@@ -1,0 +1,76 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "¿Cuáles son tus intereses o pasatiempos?",
+      "type": "multi-choice",
+      "options": [
+        "Deportes",
+        "Tecnología",
+        "Arte",
+        "Ciencia",
+        "Viajes",
+        "Anime",
+        "Manga",
+        "Novelas ligeras",
+        "Música",
+        "Videojuegos",
+        "Gastronomía",
+        "Naturaleza",
+        "Fotografía",
+        "Historia",
+        "Cultura japonesa",
+        "Idiomas",
+        "Películas / Series",
+        "Moda"
+      ],
+      "maxSelection": 5,
+      "nextQuestionId": 2
+    },
+    {
+      "id": 2,
+      "question": "¿Cuántos kanji te gustaría aprender por semana?",
+      "type": "multi-choice",
+      "options": [
+        "5",
+        "10",
+        "15",
+        "20"
+      ],
+      "maxSelection": 1,
+      "nextQuestionId": 3
+    },
+    {
+      "id": 3,
+      "question": "¿Prefieres aprender kanji con historias que incluyan situaciones de la vida real o más fantásticas?",
+      "type": "single-choice",
+      "options": [
+        "Situaciones de la vida real",
+        "Situaciones fantásticas"
+      ],
+      "nextQuestionId": 4
+    },
+    {
+      "id": 4,
+      "question": "¿Cuál es tu género favorito de historias?",
+      "type": "multi-choice",
+      "options": [
+        "Aventura",
+        "Romance",
+        "Fantasía",
+        "Ciencia ficción",
+        "Misterio",
+        "Horror",
+        "Comedia",
+        "Drama",
+        "Mitología",
+        "Suspenso",
+        "Histórico",
+        "Superhéroes",
+        "Filosófico / Reflexivo"
+      ],
+      "maxSelection": 3,
+      "nextQuestionId": 5
+    }
+  ]
+}

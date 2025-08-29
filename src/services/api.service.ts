@@ -4,7 +4,9 @@ import {
   LoginPayload,
   TokenResponse,
   RegisterPayload,
-  UseApiCall
+  UseApiCall,
+  UserPreferencesRequest,
+  UserPreferencesResponse
 } from "../models";
 import { loadAbort } from "../utilities";
 import { ApiResponse } from "@/types/api_response";
@@ -43,3 +45,23 @@ export const postLoginUser = (payload: LoginPayload): UseApiCall<TokenResponse> 
     controller
   }
 }
+
+
+export const createOrUpdateUserPreferences = (body: UserPreferencesRequest): UseApiCall<UserPreferencesResponse> => {
+  const controller = loadAbort();
+  const token = localStorage.getItem("token");
+
+  return {
+    call: axios.post<UserPreferencesResponse>(
+      `${BASE_URL}/auth/user-preferences`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      }
+    ),
+    controller,
+  };
+};

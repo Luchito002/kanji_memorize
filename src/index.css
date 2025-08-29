@@ -48,6 +48,11 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-option-selected-background: var(--option-selected-background);
+  --color-option-selected-hover: var(--option-selected-hover);
+  --color-option-unselected-background: var(--option-unselected-background);
+  --color-option-unselected-hover: var(--option-unselected-hover);
 }
 
 :root {
@@ -68,7 +73,7 @@
 
   --hover: #F0E3DC;
 
-  --primary: #D26554; /* rojo suave y cálido */
+  --primary: #D26554;
   --primary-foreground: #FFFFFF;
 
   --secondary: #E3DACF;
@@ -99,6 +104,11 @@
   --sidebar-accent-foreground: #3C2C2A;
   --sidebar-border: #DDD7C2;
   --sidebar-ring: #D26554;
+
+  --option-selected-background: #e07a7a;
+  --option-selected-hover: #c55a5a;
+  --option-unselected-background: #f2e9e9;
+  --option-unselected-hover: #f5dcdc;
 }
 
 .dark {
@@ -150,6 +160,11 @@
   --sidebar-accent-foreground: #F1EDEA;
   --sidebar-border: #3A3633;
   --sidebar-ring: #D57268;
+
+  --option-selected-background: #6a5a6f;
+  --option-selected-hover: #7a6a7f;
+  --option-unselected-background: #2e2433;
+  --option-unselected-hover: #423346;
 }
 
 @layer base {

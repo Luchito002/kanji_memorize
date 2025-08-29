@@ -42,10 +42,10 @@ export default function NewKanjiPage() {
 
       <KanjiContainerFooter>
         <NewKanjiFooter
-          next={goNext}
-          previous={goPrev}
+          next={() => { goNext(current.character) }}
+          previous={() => { goPrev(current.character) }}
           complete={today_kanji_index + 1 === end_kanji_index ? false : true}
-          completeFunction={completeDailyProgress}
+          completeFunction={() => { completeDailyProgress(current.character) }}
         />
       </KanjiContainerFooter>
     </KanjiContainer>

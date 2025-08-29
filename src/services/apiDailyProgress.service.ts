@@ -3,7 +3,7 @@ import axios from "axios";
 import { loadAbort } from "../utilities";
 import { UseApiCall } from "@/models";
 import { ApiResponse } from "@/types/api_response";
-import { DailyProgressResponse } from "@/models/daily_progress.model";
+import { DailyProgressResponse, KanjiCharRequest } from "@/models/daily_progress.model";
 
 
 export const postCreateDailyProgress = (): UseApiCall<ApiResponse<DailyProgressResponse>> => {
@@ -25,14 +25,14 @@ export const postCreateDailyProgress = (): UseApiCall<ApiResponse<DailyProgressR
   }
 }
 
-export const postIncreaseDailyProgress = (): UseApiCall<ApiResponse<null>> => {
+export const postIncreaseDailyProgress = (body: KanjiCharRequest): UseApiCall<ApiResponse<null>> => {
   const controller = loadAbort();
   const token = localStorage.getItem("token");
 
   return {
     call: axios.post<ApiResponse<null>>(
       `${BASE_URL}/dailyprogress/increase-daily-progress`,
-      null,
+      body,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,14 +44,14 @@ export const postIncreaseDailyProgress = (): UseApiCall<ApiResponse<null>> => {
   };
 }
 
-export const postDecreaseDailyProgress = (): UseApiCall<ApiResponse<null>> => {
+export const postDecreaseDailyProgress = (body: KanjiCharRequest): UseApiCall<ApiResponse<null>> => {
   const controller = loadAbort();
   const token = localStorage.getItem("token");
 
   return {
     call: axios.post<ApiResponse<null>>(
       `${BASE_URL}/dailyprogress/decrease-daily-progress`,
-      null,
+      body,
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage";
 import AuthLayout from "./layouts/AuthLayout";
 import ProfilePage from "./pages/ProfilePage";
 import SrsPage from "./pages/SrsPage";
+import RegisterQuestionsPage from "./pages/RegisterQuestionsPage";
 
 export default function AppRouter() {
   return (
@@ -22,6 +23,7 @@ export default function AppRouter() {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/questions" element={<RegisterQuestionsPage />} />
       </Route>
 
       <Route element={<AppLayout />}>
