@@ -1,4 +1,3 @@
-const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import {
   LoginPayload,
@@ -10,6 +9,9 @@ import {
 } from "../models";
 import { loadAbort } from "../utilities";
 import { ApiResponse } from "@/types/api_response";
+
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const postRegisterUser = (payload: RegisterPayload): UseApiCall<ApiResponse<TokenResponse>> => {
   const controller = loadAbort()

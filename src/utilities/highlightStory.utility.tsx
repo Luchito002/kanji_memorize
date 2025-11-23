@@ -1,14 +1,19 @@
 import { Kanji } from "@/types/kanji";
 
-export function highlightStory(story: string, kanji: Kanji) {
-  const radicalChars = kanji.radicals;
-  const kanjiMeanings = kanji.meaning.toLowerCase().split(/\s+/); // separar palabras como antes
+export function highlightStory(story: string = "", kanji: Kanji) {
+  // Obtener solo los caracteres de los radicales
+  const radicalChars = kanji.radicals?.map(r => r.char) || [];
+
+  // Separar palabras del significado del kanji
+  const kanjiMeanings = kanji.meaning?.toLowerCase().split(/\s+/) || [];
 
   const highlights: { text: string; className: string }[] = [];
 
   // Radical characters
   for (const char of radicalChars) {
-    highlights.push({ text: char, className: "text-blue-500 font-bold italic" });
+    if (char) {
+      highlights.push({ text: char, className: "text-blue-500 font-bold italic" });
+    }
   }
 
   // Kanji meanings
@@ -23,6 +28,11 @@ export function highlightStory(story: string, kanji: Kanji) {
     new Map(highlights.map(h => [h.text, h])).values()
   ).sort((a, b) => b.text.length - a.text.length);
 
+  if (uniqueHighlights.length === 0) {
+    return <span>{story}</span>;
+  }
+
+  // Crear regex para separar los highlights
   const regex = new RegExp(`(${uniqueHighlights.map(h => escapeRegExp(h.text)).join("|")})`, "gi");
   const parts = story.split(regex);
 
@@ -40,5 +50,5 @@ export function highlightStory(story: string, kanji: Kanji) {
 }
 
 function escapeRegExp(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

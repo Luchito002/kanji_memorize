@@ -1,17 +1,16 @@
 const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import { loadAbort } from "../utilities";
-import { UseApiCall } from "@/models";
+import { UseApiCall, GetUserPreferencesResponse } from "@/models";
 import { ApiResponse } from "@/types/api_response";
-import { KanjiSRSResponse } from "@/models/srs.model";
 
-export const getDueKanji = (): UseApiCall<ApiResponse<KanjiSRSResponse[]>> => {
+export const getUserPreferences = (): UseApiCall<ApiResponse<GetUserPreferencesResponse>> => {
   const controller = loadAbort();
   const token = localStorage.getItem("token");
 
   return {
-    call: axios.get<ApiResponse<KanjiSRSResponse[]>>(
-      `${BASE_URL}/srs/due-kanji`,
+    call: axios.get<ApiResponse<GetUserPreferencesResponse>>(
+      `${BASE_URL}/userspreferences/get-user-preferences`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,4 +20,4 @@ export const getDueKanji = (): UseApiCall<ApiResponse<KanjiSRSResponse[]>> => {
     ),
     controller,
   };
-}
+};

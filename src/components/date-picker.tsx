@@ -8,7 +8,7 @@ import {
   SelectValue
 } from "./ui/select"
 
-const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)
+const years = Array.from({ length: 2020 - 1940 + 1 }, (_, i) => 2020 - i)
 const months = Array.from({ length: 12 }, (_, i) => i + 1)
 
 function getDaysInMonth(month: number, year: number) {

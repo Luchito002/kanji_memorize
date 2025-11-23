@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/progess";
 import questionsData from "@/data/questions.json";
@@ -6,9 +6,23 @@ import { useApi } from "@/hooks/useApi";
 import { UserPreferencesRequest, UserPreferencesResponse } from "@/models";
 import { createOrUpdateUserPreferences } from "@/services/api.service";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function RegisterQuestionsPage() {
+  const token = localStorage.getItem("token");
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/register")
+    }
+
+    if (!token) {
+      navigate("/register")
+    }
+  }, [currentUser, navigate, token])
+
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const { fetch } = useApi<UserPreferencesResponse, UserPreferencesRequest>(createOrUpdateUserPreferences);

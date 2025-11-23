@@ -4,6 +4,7 @@ import LoadingAnimation from "@/components/loading-animation";
 import NewKanjiCard from "@/components/NewKanjiPage/NewKanjiCard";
 import NewKanjiFooter from "@/components/NewKanjiPage/NewKanjiFooter";
 import TodayProgressCongratulations from "@/components/NewKanjiPage/TodayProgressCongratulations";
+import Message from "@/components/message";
 import { useDailyKanjis } from "@/hooks/useDailyKanjis";
 
 export default function NewKanjiPage() {
@@ -15,10 +16,10 @@ export default function NewKanjiPage() {
     end_kanji_index,
     completed,
     goNext,
-    goPrev
+    goPrev,
+    generatingStory,
+    message
   } = useDailyKanjis();
-
-  console.log(today_kanji_index)
 
   if (completed) return <TodayProgressCongratulations />
 
@@ -26,8 +27,14 @@ export default function NewKanjiPage() {
 
   if (!current) return <LoadingAnimation label="Cargando Kanjis" />
 
+  if (generatingStory) return <LoadingAnimation label="Generando historia" />
+
   return (
     <KanjiContainer>
+      {message &&
+        //<Message type={message.type} message={message.message} />
+        <></>
+      }
       <KanjiContainerHeader>
         <KanjiProgressHeader
           min={0}

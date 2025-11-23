@@ -1,6 +1,5 @@
-import { X } from "lucide-react"
-import { useNavigate } from "react-router-dom"
 import { Progress } from "./progess"
+import ButtonBack from "./button-back"
 
 interface Props {
   current: number
@@ -9,24 +8,11 @@ interface Props {
 }
 
 export default function KanjiProgressHeader({ current, max, min}: Props) {
-  const navigate = useNavigate()
-
-  const onExit = () => {
-    navigate("/menu")
-  }
-
   return (
     <div className="w-full flex items-center justify-between mb-6 gap-4">
-      <Progress current={current} max={max - 1} min={min}/>
+      <ButtonBack />
 
-      {/* Exit button */}
-      <button
-        onClick={onExit}
-        className="text-gray-500 hover:text-red-500 transition-colors cursor-pointer"
-        aria-label="Salir"
-      >
-        <X size={24} />
-      </button>
+      <Progress current={current} max={max - 1} min={min}/>
     </div>
   )
 }

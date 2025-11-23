@@ -34,7 +34,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (data) {
-      navigate('/menu')
+      navigate('/questions')
     }
     if (error?.response?.data?.message === "Username already exists") {
       setError("name", {
@@ -46,11 +46,13 @@ export default function RegisterPage() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const birthdate = `${data.birthYear}-${data.birthMonth.padStart(2, "0")}-${data.birthDay.padStart(2, "0")}`
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const payload: RegisterPayload = {
       username: data.name,
       password: data.password,
-      birthdate
+      birthdate,
+      timezone
     }
     const dataRegister = await registerUserFetch(payload)
     if (dataRegister.result) {

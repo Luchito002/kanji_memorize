@@ -6,7 +6,8 @@ export interface TokenResponse {
 export interface RegisterPayload {
   username: string,
   password: string,
-  birthdate: string
+  birthdate: string,
+  timezone: string
 }
 
 export interface LoginPayload {
@@ -18,7 +19,3 @@ export interface UserPreferenceItem {
   question_id: number;
   selected_options: string[];
 }
-
-export type UserPreferencesRequest = UserPreferenceItem[];
-
-export type UserPreferencesResponse = UserPreferenceItem[];

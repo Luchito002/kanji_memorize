@@ -9,6 +9,7 @@ export interface UserResponse {
   username: string;
   birthdate: string;
   created_at: string;
+  rol: string;
 }
 
 export interface UserEditRequest {

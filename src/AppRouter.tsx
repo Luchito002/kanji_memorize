@@ -10,8 +10,12 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AuthLayout from "./layouts/AuthLayout";
 import ProfilePage from "./pages/ProfilePage";
-import SrsPage from "./pages/SrsPage";
+import RememberKanjiPage from "./pages/RememberKanjiPage";
 import RegisterQuestionsPage from "./pages/RegisterQuestionsPage";
+import ProgressPage from "./pages/ProgressPage";
+import { RememberKanjiProvider } from "./context/RememberKanjiContext";
+import QuicKTestPage from "./pages/QuickTestPage";
+import AdminRoute from "./components/AdminPage/AdminRoute";
 
 export default function AppRouter() {
   return (
@@ -32,8 +36,22 @@ export default function AppRouter() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/armar" element={<BuildKanjiPage />} />
         <Route path="/seleccionar" element={<SelectKanjiPage />} />
-        <Route path="/srs" element={<SrsPage />} />
+        <Route path="/remember" element=
+          {
+            <RememberKanjiProvider>
+              <RememberKanjiPage />
+            </RememberKanjiProvider>
+          }
+        />
+        <Route path="/quicktest" element={<QuicKTestPage />} />
+        <Route path="/progress" element={<ProgressPage />} />
+
+
       </Route>
+
+      <Route element={<AdminRoute />} />
+        <Route path="/admin" element={<h1>Eres Admin</h1>}/>
+      <Route />
 
       <Route path="*" element={<h1>Not Found</h1>} />
     </Routes>

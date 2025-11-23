@@ -1,10 +1,11 @@
-const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import { loadAbort } from "../utilities";
 import { UseApiCall } from "@/models";
 import { ApiResponse } from "@/types/api_response";
 import { DailyProgressResponse, KanjiCharRequest } from "@/models/daily_progress.model";
+import { Kanji } from "@/types/kanji";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const postCreateDailyProgress = (): UseApiCall<ApiResponse<DailyProgressResponse>> => {
   const controller = loadAbort()
@@ -91,6 +92,24 @@ export const putIncreaseEndKanjiIndex = (increment: number): UseApiCall<ApiRespo
     call: axios.put<ApiResponse<null>>(
       `${BASE_URL}/dailyprogress/increase-end-kanji-index`,
       { increment },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      }
+    ),
+    controller,
+  };
+}
+
+export const getLastKanjiViewed = (): UseApiCall<ApiResponse<Kanji>> => {
+  const controller = loadAbort();
+  const token = localStorage.getItem("token");
+
+  return {
+    call: axios.get<ApiResponse<Kanji>>(
+      `${BASE_URL}/dailyprogress/get-last-kanji-viewed`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

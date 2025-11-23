@@ -5,7 +5,6 @@ export interface DailyProgressResponse {
   completed: boolean
 }
 
-
 export interface KanjiCharRequest {
   kanji_char: string
 }

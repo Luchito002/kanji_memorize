@@ -2,17 +2,27 @@
   {
     "position": 1,
     "character": "一",
-    "radicals": [],
+    "radicals" : [
+      {
+        "char" : ["一"],
+        "meaning": ["techo", "suelo"]
+      }
+    ],
     "meaning": "uno",
-    "story": "En la escritura china y japonesa, el número <b>uno</b> de representa con un trazo horizontal, contrariamente al numeral romano I que se encuentra en posición vertical. Parece algo evidente decir que se escribe de izquierda a derecha.",
+    "story": "En la escritura china y japonesa, el número uno de representa con un trazo horizontal, contrariamente al numeral romano I que se encuentra en posición vertical. Parece algo evidente decir que se escribe de izquierda a derecha.",
     "jlpt": "N5",
     "strokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/一.gif",
-    "easyRemember": ""
+    "easyRemember": "",
+    "radicalExplanation": "Cuando funciona como componente, este carácter pierde el significado clave y entonces esta única línea horizontal adquiere el significado de suelo o de techo según su posición: si se encuentra encima de otro componente, toma el significado de techo; si está debajo, de suelo."
   },
   {
     "position": 2,
     "character": "二",
-    "radicals": [],
+    "radicals" : {
+      "char" : ["一"],
+      "meaning": ["techo", "suelo"]
+    },
+    "radicals_meanings": ["techo", "suelo"],
     "meaning": "dos",
     "story": "Al igual que en el caso de los numerales romanos, en el que el numeral II duplica al numeral I, el kanji de <b>dos</b> es una simple duplicación del trazo horizontal que significa <i>uno</i>. El orden de escritura va de arriba a abajo. El primer trazo es un poco más corto que el segundo.",
     "jlpt": "N5",
@@ -22,7 +32,10 @@
   {
     "position": 3,
     "character": "三",
-    "radicals": [],
+    "radicals" : {
+      "char" : ["一"],
+      "meaning": ["techo", "suelo"]
+    },
     "meaning": "tres",
     "story": "Y una vez más, al igual que en el caso del numeral romano III, que triplica al numeral I, el kanji de <b>tres</b> simplemente triplica un único trazo horizontal. Cuando escribas este carácter, quizás te sirva pensar en un bocadillo cuidadosamente preparado para no ensuciarse las manos con él: el contenido (el trazo del medio) debe ser más pequeño que las rebanadas de pan (trazos superior e inferior). Así, el trazo de en medio de este kanji es más corto que los otros dos.",
     "jlpt": "N5",
@@ -69,7 +82,8 @@
     "story": "Observa que el primer trazo «atraviesa» limpiamente al segundo. Esta característica nos permitirá diferenciar el kanji <b>siete</b> del kanji que significa <i>cuchara 匕 </i> (Cuadro 444), en el que el trazo horizontal termina un poco después de encontrarse con el vertical.",
     "jlpt": "N5",
     "strokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/七.gif",
-    "easyRemember": ""
+    "easyRemember": "",
+    "radicalExplanation": "En tanto que componente, esta forma toma el significado de cortar en dados, en pequeños trozos, lo que concuerda tanto con el modo de escribir el carácter como con su asociación con el kanji de cortar, que se vera mas adelante."
   },
   {
     "position": 8,
@@ -89,7 +103,8 @@
     "story": "Si haces un pequeño esfuerzo para recordar el orden de trazos de este kanji no tendrás dificultades posteriormente para distinguirlo del kanji de <i>fuerza 力</i> (Cuadro 858).",
     "jlpt": "N5",
     "strokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/九.gif",
-    "easyRemember": ""
+    "easyRemember": "",
+    "radicalExplanation": "Como componente, podemos dar a este carácter el significado de béisbol, ya que cada equipo de béisbol tiene nueve miembros. Aunque es un deporte más conocido en Centroamérica que en el resto del mundo de habla hispana, no será difícil imaginar las cosas que se pueden hacer con un bate; eso nos ayudará a imaginar historias para los pocos kanji que usan este componente."
   },
   {
     "position": 10,
@@ -99,7 +114,8 @@
     "story": "Sí volteas este carácter 45° en cualquier dirección obtendrás la x que se utiliza para indicar <b>diez</b> en los números romanos.",
     "jlpt": "N5",
     "strokeOrder": "https://raw.githubusercontent.com/jcsirot/kanji.gif/refs/heads/master/kanji/gif/150x150/十.gif",
-    "easyRemember": ""
+    "easyRemember":"",
+    "radicalExplanation": "Como componente, este carácter a veces conserva su significado original y otras veces adquiere el significado de “aguja”, derivado del kanji de aguja. Dado que este componente forma parte de ese kanji, no es necesario preocuparse por posibles confusiones entre ambos. De hecho, se seguira usando esa estrategia con frecuencia."
   },
   {
     "position": 11,

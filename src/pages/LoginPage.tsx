@@ -14,12 +14,21 @@ import { loginSuccess } from '@/redux/states';
 import LoadingAnimationSmall from '@/components/Animations/loading-animation-small';
 import SuccessfullyAnimationSmall from '@/components/Animations/successfully-animation-small';
 import CustomFormAuth from '@/components/AuthPages/CustomFormAuth';
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function LoginPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/menu")
+    }
+  }, [currentUser, navigate])
 
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
+
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
     defaultValues: {
