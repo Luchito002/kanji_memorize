@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useModalContext } from "./Modal/context/UseModalContext";
 import { Radical } from "@/types/kanji";
+import { useModalContext } from "./Modal/context/UseModalContext";
 
 interface RadicalExplanationProps {
   explanation: string,

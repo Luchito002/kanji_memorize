@@ -22,6 +22,7 @@ export default function useFsrs() {
   const [reviewedCount, setReviewedCount] = useState<number>(0);
   const [currentCard, setCurrentCard] = useState<CardResponse>();
   const [showAnswer, setShowAnswer] = useState<boolean>();
+  const [isTodayReviewsCompleted, setIsTodayReviewsCompleted] = useState<boolean>();
 
   const { data, fetch: getTodayCardsFetch } = useApi<ApiResponse<TodayCardsResponse>, void>(getTodayCards, { autoFetch: true, params: undefined });
   const { fetch: getCardIntervalsFetch } = useApi<ApiResponse<CardWithIntervalsResponse>, CardWithIntervalsRequest>(getCardIntervals);
@@ -68,6 +69,8 @@ export default function useFsrs() {
   useEffect(() => {
     const init = async () => {
       if (!data?.result) return;
+
+      setIsTodayReviewsCompleted(data.result.completed)
 
       // Actualizar kanji actual y lista
       updateCurrentFromResult(data.result.todays_cards);
@@ -128,5 +131,6 @@ export default function useFsrs() {
     reviewedCount,
     kanjiCount,
     currentIntervals,
+    isTodayReviewsCompleted
   };
 }

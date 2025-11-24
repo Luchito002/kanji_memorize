@@ -52,19 +52,25 @@ export default function EditSettings() {
   }, [data])
 
   const onSubmit: SubmitHandler<EditSettingsValues> = async (data) => {
-    console.log({
-      theme: data.theme,
-      daily_kanji_limit: data.daily_kanji_limit,
-      daily_srs_limit: data.daily_srs_limit,
-    })
+    if (!userSettings?.result) return;
 
+    const original = userSettings.result;
+
+    const noChanges =
+      original.theme === data.theme &&
+      original.daily_kanji_limit === data.daily_kanji_limit &&
+      original.daily_srs_limit === data.daily_srs_limit;
+
+    if (noChanges) {
+      return;
+    }
 
     await editSettingsFetch({
       theme: data.theme,
       daily_kanji_limit: data.daily_kanji_limit,
       daily_srs_limit: data.daily_srs_limit,
-    })
-  }
+    });
+  };
 
   if (!userSettings) return <h1>Cargando Configuraciones...</h1>
 

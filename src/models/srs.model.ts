@@ -81,3 +81,7 @@ export interface CreateCardResponse {
   kanji_char: string;
   fsrs_state: FSRSState;
 }
+
+export interface IncrementKanjiCountRequest {
+  increment: number
+}

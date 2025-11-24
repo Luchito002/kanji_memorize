@@ -70,7 +70,7 @@ export function useDailyKanjis() {
       if (userStoryResponse.status === "success" && userStoryResponse.result?.story) {
         setKanjis((prev) => {
           const updated = [...prev];
-          updated[index] = { ...updated[index], story: userStoryResponse.result.story };
+          updated[index] = { ...updated[index], story: userStoryResponse.result?.story ?? "" };
           return updated;
         });
         setMessage({

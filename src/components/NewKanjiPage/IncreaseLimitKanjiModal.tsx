@@ -10,13 +10,20 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useApi } from "@/hooks/useApi";
 import { ApiResponse } from "@/types/api_response";
 import { putIncreaseEndKanjiIndex } from "@/services/apiDailyProgress.service";
+import { incrementKanjiCount } from "@/services/apiFsrs.service";
+import { IncrementKanjiCountRequest } from "@/models/srs.model";
 
-export default function IncreaseLimitKanjiModal() {
+interface Props {
+  which: 'new_kanji' | 'fsrs_kanji'
+}
+
+export default function IncreaseLimitKanjiModal({ which }: Props) {
   const { setState } = useModalContext()
 
   const navigate = useNavigate();
 
   const { fetch } = useApi<ApiResponse<null>, number>(putIncreaseEndKanjiIndex)
+  const { fetch: incrementKanjiCountFetch } = useApi<ApiResponse<null>, IncrementKanjiCountRequest>(incrementKanjiCount)
 
   useEffect(() => {
     setState(false)
@@ -29,7 +36,8 @@ export default function IncreaseLimitKanjiModal() {
   })
 
   const onSubmit: SubmitHandler<EditSettingsLimitTodayValues> = async (data) => {
-    await fetch(data.daily_kanji_limit)
+    if (which === "new_kanji") await fetch(data.daily_kanji_limit)
+    if (which === "fsrs_kanji") await incrementKanjiCountFetch({ increment: data.daily_kanji_limit })
     navigate(0)
   };
 

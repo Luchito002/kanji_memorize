@@ -4,7 +4,7 @@ interface RememberKanjiContextType {
   writeTimeSec: number | null
   setWriteTimeSec: (value: number) => void
   strokeErrors: number | null
-  setStrokeErrors: (value: number) => void
+  setStrokeErrors: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const RememberKanjiContext = createContext<RememberKanjiContextType | undefined>(undefined)

@@ -5,6 +5,7 @@ import KanjiMeanings from "@/components/KanjiMeanings"
 import KanjiProgressHeader from "@/components/KanjiProgressHeader"
 import LoadingAnimation from "@/components/loading-animation"
 import NewKanjiCard from "@/components/NewKanjiPage/NewKanjiCard"
+import TodayProgressCongratulations from "@/components/NewKanjiPage/TodayProgressCongratulations"
 import { Button } from "@/components/ui/button"
 import useFsrs from "@/hooks/useFsrs"
 import { useState } from "react"
@@ -19,12 +20,14 @@ export default function RememberKanjiPage() {
     reviewedCount,
     kanjiCount,
     currentIntervals,
-    kanjiList
+    kanjiList,
+    isTodayReviewsCompleted
   } = useFsrs()
 
   const [isComplete, setIsComplete] = useState<boolean>(false)
 
-  if (kanjiList?.length === 0) return <BigMessage message="Sin kanji por repasar"/>
+  if (isTodayReviewsCompleted) return <TodayProgressCongratulations label="Haz completado el repaso de kanji por el día de hoy" which="fsrs_kanji"/>
+  if (kanjiList?.length === 0) return <BigMessage message="Sin kanji por repasar" />
   if (!currentKanji) return <LoadingAnimation label="Cargando Kanji" />
   if (!currentCard) return <LoadingAnimation label="Cargando Kanji" />
 

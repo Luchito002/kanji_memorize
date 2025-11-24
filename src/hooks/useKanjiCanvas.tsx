@@ -200,7 +200,8 @@ export function useKanjiCanvas(
     } else {
       animateErase(currentStroke);
       shakeCanvas();
-      setStrokeErrors((prev) => prev + 1);
+      setStrokeErrors(prev => (prev ?? 0) + 1);
+
     }
 
     setCurrentStroke([]);

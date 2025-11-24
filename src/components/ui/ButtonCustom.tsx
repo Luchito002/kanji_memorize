@@ -5,7 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode
 }
 
-export default function Button({
+export default function ButtonCustom({
   children,
   loading = false,
   icon,

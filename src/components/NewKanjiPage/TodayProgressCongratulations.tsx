@@ -6,7 +6,12 @@ import { Button } from "../ui/button";
 import { useModalContext } from "../Modal/context/UseModalContext";
 import IncreaseLimitKanjiModal from "./IncreaseLimitKanjiModal";
 
-export default function TodayProgressCongratulations() {
+interface Props {
+  label: string
+  which: 'new_kanji' | 'fsrs_kanji'
+}
+
+export default function TodayProgressCongratulations({ label, which }: Props) {
   const { setState } = useModalContext()
   const navigate = useNavigate()
 
@@ -28,14 +33,14 @@ export default function TodayProgressCongratulations() {
       <CheckCircle className="w-20 h-20 text-green-500 mb-4" />
       <h1 className="text-3xl font-bold mb-2">¡Felicidades!</h1>
       <p className="text-muted-foreground text-lg">
-        Has completado tu estudio de kanjis de hoy. ¡Sigue así!
+        {label}
       </p>
       <Button onClick={handleClick}>Terminar estudio del día</Button>
       <Button variant="link" size="xl" onClick={handleClickIncrementLimit}>¿Aumentar el límite de kanji por hoy?</Button>
       <Link to="/profile/#daily_kanji_limit"><Button variant="link" size="xl">Tambien puedes configurar el límite de kanji por día</Button></Link>
 
 
-      <IncreaseLimitKanjiModal />
+      <IncreaseLimitKanjiModal which={which} />
     </div>
   );
 }

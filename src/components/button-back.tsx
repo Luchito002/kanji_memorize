@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { IoCaretBackCircle } from "react-icons/io5";
 
 interface Props {
-  className: string
+  className?: string
 }
 
 export default function ButtonBack({ className }: Props) {
