@@ -1,8 +1,9 @@
-const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import { loadAbort } from "../utilities";
 import { UseApiCall, UserGenerateStoryRequest, UserGenerateStoryResponse, UserGetStoryRequest, UserGetStoryResponse } from "@/models";
 import { ApiResponse } from "@/types/api_response";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const postGenerateStory = (body: UserGenerateStoryRequest): UseApiCall<ApiResponse<UserGenerateStoryResponse>> => {
   const controller = loadAbort();

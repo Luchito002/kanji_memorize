@@ -1,9 +1,12 @@
-const BASE_URL = "http://localhost:8000";
 import axios from "axios";
 import { loadAbort } from "../utilities";
 import { UseApiCall } from "@/models";
 import { ApiResponse } from "@/types/api_response";
 import { KanjiMatchResponse, MatchRequest, StrokeInput, StrokeValidationResult } from "@/models/kanji_match.model";
+
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 export const matchKanji = (body: MatchRequest): UseApiCall<ApiResponse<KanjiMatchResponse>> => {
   const controller = loadAbort();
