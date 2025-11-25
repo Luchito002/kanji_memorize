@@ -14,9 +14,12 @@ export default function AppLayout() {
       return;
     }
 
+    if (token && !currentUser) return;
+
     if (currentUser?.rol === "admin") {
       navigate("/admin", { replace: true });
     }
+
   }, [currentUser, navigate]);
 
   return <Outlet />;

@@ -26,7 +26,7 @@ export default function RememberKanjiPage() {
 
   const [isComplete, setIsComplete] = useState<boolean>(false)
 
-  if (isTodayReviewsCompleted) return <TodayProgressCongratulations label="Haz completado el repaso de kanji por el día de hoy" which="fsrs_kanji"/>
+  if (isTodayReviewsCompleted) return <TodayProgressCongratulations label="Haz completado el repaso de kanji por el día de hoy" which="fsrs_kanji" />
   if (kanjiList?.length === 0) return <BigMessage message="Sin kanji por repasar" />
   if (!currentKanji) return <LoadingAnimation label="Cargando Kanji" />
   if (!currentCard) return <LoadingAnimation label="Cargando Kanji" />
@@ -66,7 +66,7 @@ export default function RememberKanjiPage() {
         }
 
         {(isComplete || showAnswer) &&
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-2 justify-center w-full">
             <Button onClick={() => buttonHandler(1)} className="rounded-2xl py-2 text-base font-medium bg-red-800">
               Una vez más ({currentIntervals?.again})
             </Button>
