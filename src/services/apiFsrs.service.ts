@@ -47,6 +47,8 @@ export const cardReview = (body: ReviewCardRequest): UseApiCall<ApiResponse<stri
   const controller = loadAbort();
   const token = localStorage.getItem("token");
 
+  console.log(`${BASE_URL}/fsrs/review-card`)
+
   return {
     call: axios.post<ApiResponse<string>>(
       `${BASE_URL}/fsrs/review-card`,

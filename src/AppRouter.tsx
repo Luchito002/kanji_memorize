@@ -16,6 +16,7 @@ import ProgressPage from "./pages/ProgressPage";
 import { RememberKanjiProvider } from "./context/RememberKanjiContext";
 import QuicKTestPage from "./pages/QuickTestPage";
 import AdminRoute from "./components/AdminPage/AdminRoute";
+import AdminPage from "./pages/AdminPage";
 
 export default function AppRouter() {
   return (
@@ -50,7 +51,7 @@ export default function AppRouter() {
       </Route>
 
       <Route element={<AdminRoute />} />
-        <Route path="/admin" element={<h1>Eres Admin</h1>}/>
+        <Route path="/admin" element={<AdminPage />}/>
       <Route />
 
       <Route path="*" element={<h1>Not Found</h1>} />

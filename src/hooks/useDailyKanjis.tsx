@@ -1,4 +1,4 @@
-import kanjiJson from "@/assets/kanjis_convertidos_normalizado.json";
+import kanjiJson from "@/assets/kanjis_normalizado_final.json";
 import { useEffect, useRef, useState } from "react";
 import { Kanji } from "@/types/kanji";
 import { useApi } from "./useApi";

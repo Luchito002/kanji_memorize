@@ -27,10 +27,6 @@ export function useKanjiCanvas(
 
   const isDarkMode = () => document.documentElement.classList.contains("dark");
 
-  /**
-   * Ajuste por devicePixelRatio (DPR) para nitidez y coordenadas correctas.
-   * Mantiene el espacio de dibujo en "coordenadas CSS" aunque el buffer sea mayor.
-   */
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");

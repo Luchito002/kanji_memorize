@@ -14,7 +14,7 @@ import { Kanji } from "@/types/kanji";
 import { useRememberKanji } from "@/context/RememberKanjiContext";
 
 export default function useFsrs() {
-  const { strokeErrors, writeTimeSec } = useRememberKanji()
+  const { strokeErrors, writeTimeSec, setStrokeErrors, setWriteTimeSec} = useRememberKanji()
   const [currentKanji, setCurrentKanji] = useState<Kanji>();
   const [currentIntervals, setCurrentIntervals] = useState<CardWithIntervalsResponse>();
   const [kanjiList, setKanjiList] = useState<Kanji[]>();
@@ -33,6 +33,7 @@ export default function useFsrs() {
     if (!result) return;
 
 
+  console.log(result)
     const foundKanjiList: Kanji[] = result
       .map(card => kanjiJson.find(k => k.character === card.kanji_char))
       .filter(Boolean) as Kanji[];
@@ -102,13 +103,14 @@ export default function useFsrs() {
       stroke_errors: strokeErrors
     });
 
+    setStrokeErrors(0)
+    setWriteTimeSec(0)
+
     const response = await getTodayCardsFetch();
 
     const todaysCards = response?.result?.todays_cards ?? [];
 
     updateCurrentFromResult(todaysCards);
-
-    console.log("BEFORE:", todaysCards.map(c => c.kanji_char));
 
     // Actualizar intervalos del nuevo kanji actual si hay cartas
     if (todaysCards.length > 0) {
