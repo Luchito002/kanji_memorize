@@ -12,7 +12,7 @@ export default function MenuPage() {
       y: 0,
       transition: {
         duration: 0.4,
-        ease: "easeOut",
+        ease: [0.25, 0.1, 0.25, 1] as const,
         delay: i * 0.2,
       },
     }),
@@ -45,10 +45,34 @@ export default function MenuPage() {
         animate="visible"
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
       >
-        <QuickAction icon={<FiBook className="text-green-800"/>} label="Nuevos kanji" to="/new" />
-        <QuickAction icon={<FiRefreshCw className="text-blue-800"/>} label="Recordar kanji" to="/remember" />
-        <QuickAction icon={<FiEdit className="text-red-800"/>} label="Test rápido" to="/quicktest" />
-        <QuickAction icon={<FiBarChart2 className="text-yellow-300"/>} label="Ver progreso" to="/progress" />
+        <QuickAction
+          icon={<FiBook className="text-emerald-700 dark:text-emerald-300" />}
+          label="Nuevos kanji"
+          subtitle="Aprendé algo nuevo"
+          toneClassName="bg-emerald-400/35"
+          to="/new"
+        />
+        <QuickAction
+          icon={<FiRefreshCw className="text-sky-700 dark:text-sky-300" />}
+          label="Recordar kanji"
+          subtitle="Repaso inteligente"
+          toneClassName="bg-sky-400/35"
+          to="/remember"
+        />
+        <QuickAction
+          icon={<FiEdit className="text-rose-700 dark:text-rose-300" />}
+          label="Test rápido"
+          subtitle="Desafío express"
+          toneClassName="bg-rose-400/35"
+          to="/quicktest"
+        />
+        <QuickAction
+          icon={<FiBarChart2 className="text-amber-700 dark:text-amber-300" />}
+          label="Ver progreso"
+          subtitle="Tu avance diario"
+          toneClassName="bg-amber-400/35"
+          to="/progress"
+        />
       </motion.section>
     </main>
   );
